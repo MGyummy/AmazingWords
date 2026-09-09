@@ -252,6 +252,7 @@
         <button type="button" id="shuffle" class="secondary">换一句</button>
         <button type="button" id="swap-img" class="secondary hidden">换配图</button>
         <button type="button" id="download" class="primary">下载 PNG</button>
+        <button type="button" id="download-jpg" class="secondary">下载 JPG</button>
       </div>
     </section>
 
@@ -4468,7 +4469,8 @@
         upload: document.getElementById('upload-file'),
         shuffle: document.getElementById('shuffle'),
         swapImg: document.getElementById('swap-img'),
-        download: document.getElementById('download')
+        download: document.getElementById('download'),
+        downloadJpg: document.getElementById('download-jpg')
       }
 
       /* ---------------- 文案 ---------------- */
@@ -4752,24 +4754,24 @@
       }
 
       function layoutQuote(quoteText, quoteTop) {
-        const maxW = 650
+        const maxW = LW - 156
         const top = quoteTop
         const availH = quoteTop > 400 ? (912 - 52 - quoteTop) : 610
-        let size = quoteTop > 400 ? 27 : 33
+        let size = quoteTop > 400 ? 32 : 40
         let lineHeight = 0
         let lines = []
 
         for (let guard = 0; guard < 8; guard++) {
           const spec = kaiFont(size, '400')
           lines = wrapByWidth(quoteText, maxW, spec)
-          lineHeight = Math.round(size * 1.78)
-          const fits = lines.length * lineHeight <= availH - 44
+          lineHeight = Math.round(size * 1.7)
+          const fits = lines.length * lineHeight <= availH - 46
           if (fits || size <= 21) break
           size -= 2
         }
 
         const total = lines.length * lineHeight
-        const y = top + Math.max(0, (availH - total - 44) / 2)
+        const y = top + Math.max(0, (availH - total - 46) / 2)
         return { lines: lines, size: size, lineHeight: lineHeight, y: y }
       }
 
@@ -4778,15 +4780,16 @@
         const lay = layoutQuote(quoteText, quoteTop)
 
         for (let i = 0; i < lay.lines.length; i++) {
-          fillText(lay.lines[i], 50, lay.y + i * lay.lineHeight + lay.size, {
+          fillText(lay.lines[i], 78, lay.y + i * lay.lineHeight + lay.size, {
             font: kaiFont(lay.size, '400'),
             color: '#28261f'
           })
         }
 
         const src = quoteSource()
-        const srcY = lay.y + lay.lines.length * lay.lineHeight + 24
-        fillText(src ? '—— ' + src : '', LW - 50, srcY, {
+        const lastBaseline = lay.y + (lay.lines.length - 1) * lay.lineHeight + lay.size
+        const srcY = lastBaseline + 14
+        fillText(src ? '—— ' + src : '', LW - 78, srcY, {
           font: sansFont(13),
           color: '#6d675b',
           align: 'right'
@@ -4878,16 +4881,19 @@
       }
 
       /* ---------------- 下载 ---------------- */
-      function downloadPng() {
+      function downloadImage(kind) {
         const d = state.date
-        const name = '码字人日历-' + d.key + '.png'
+        const isPng = kind === 'png'
+        const ext = isPng ? 'png' : 'jpg'
+        const mime = isPng ? 'image/png' : 'image/jpeg'
+        const name = '码字人日历-' + d.key + '.' + ext
         if (canvas.toBlob) {
           canvas.toBlob(function (blob) {
             if (!blob) return
             triggerDownload(URL.createObjectURL(blob), name)
-          }, 'image/png')
+          }, mime, isPng ? undefined : 0.92)
         } else {
-          triggerDownload(canvas.toDataURL('image/png'), name)
+          triggerDownload(canvas.toDataURL(mime, isPng ? undefined : 0.92), name)
         }
       }
 
@@ -5005,7 +5011,12 @@
         render()
       })
 
-      els.download.addEventListener('click', downloadPng)
+      els.download.addEventListener('click', function () {
+        downloadImage('png')
+      })
+      els.downloadJpg.addEventListener('click', function () {
+        downloadImage('jpg')
+      })
 
       /* ---------------- 启动 ---------------- */
       function boot() {
