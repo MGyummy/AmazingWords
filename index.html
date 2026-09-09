@@ -1,12 +1,18 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hans">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>码字人日历 · 戏剧·诗歌·小说</title>
   <style>
+    @import url('https://cdn.jsdelivr.net/npm/cn-fontsource-smiley-sans-oblique-regular/font.css');
     @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/400.css');
-    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/700.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/500.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/900.css');
+    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css');
+    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.2.6/400.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.2.6/700.css');
     :root {
       --bg: #e9e2d2;
       --panel: #f7f1e2;
@@ -24,7 +30,7 @@
         radial-gradient(circle at 90% 100%, rgba(180, 67, 47, .07), transparent 38%),
         var(--bg);
       color: var(--ink);
-      font-family: "PingFang TC", "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
       display: flex;
       justify-content: center;
     }
@@ -736,7 +742,9 @@
 
       /* ---------------- Canvas 工具 ---------------- */
       const SERIF = '"Noto Serif SC","Songti SC","STSong","SimSun",serif'
-      const SANS = '"PingFang TC","PingFang SC","Microsoft JhengHei","Microsoft YaHei",sans-serif'
+      const SANS = '"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif'
+      const DISPLAY = '"Smiley Sans Oblique","Smiley Sans","得意黑",sans-serif'
+      const KAI = '"LXGW WenKai","Kaiti SC","STKaiti","KaiTi",serif'
 
       function font(px, style) {
         return (style || '400') + ' ' + px + 'px ' + SERIF
@@ -744,6 +752,14 @@
 
       function sansFont(px, weight) {
         return (weight || '400') + ' ' + px + 'px ' + SANS
+      }
+
+      function displayFont(px, weight) {
+        return (weight || '400') + ' ' + px + 'px ' + DISPLAY
+      }
+
+      function kaiFont(px, weight) {
+        return (weight || '400') + ' ' + px + 'px ' + KAI
       }
 
       function line(x1, y1, x2, y2, color, width, dash) {
@@ -821,11 +837,11 @@
         line(x1, 92, x2, 92, '#28261f', 1)
 
         fillText('戏剧·诗歌·小说', x1, 78, {
-          font: font(22, '500'),
+          font: displayFont(22, '400'),
           color: '#28261f'
         })
         fillText('码字人日历', x2, 78, {
-          font: font(21, '500'),
+          font: displayFont(21, '400'),
           color: '#b4432f',
           align: 'right'
         })
@@ -841,10 +857,10 @@
 
       function drawDate(d) {
         const dayText = d.monthDay
-        ctx.font = font(58, '500')
+        ctx.font = font(58, '900')
         const dayWidth = Math.ceil(ctx.measureText(dayText).width)
         fillText(dayText, 50, 190, {
-          font: font(58, '500'),
+          font: font(58, '900'),
           color: '#28261f'
         })
         const metaX = 50 + dayWidth + 24
@@ -919,7 +935,7 @@
         let lines = []
 
         for (let guard = 0; guard < 8; guard++) {
-          const spec = font(size, '400')
+          const spec = kaiFont(size, '400')
           lines = wrapByWidth(quoteText, maxW, spec)
           lineHeight = Math.round(size * 1.78)
           const fits = lines.length * lineHeight <= availH - 44
@@ -938,7 +954,7 @@
 
         for (let i = 0; i < lay.lines.length; i++) {
           fillText(lay.lines[i], 50, lay.y + i * lay.lineHeight + lay.size, {
-            font: font(lay.size, '400'),
+            font: kaiFont(lay.size, '400'),
             color: '#28261f'
           })
         }
@@ -1144,9 +1160,10 @@
       }
       if (document.fonts && document.fonts.load) {
         Promise.all([
-          document.fonts.load('400 20px "Noto Serif SC"'),
-          document.fonts.load('700 20px "Noto Serif SC"'),
-          document.fonts.load('400 20px "Noto Serif SC"', '码字人日历戏剧诗歌小说看水写')
+          document.fonts.load('400 20px "Smiley Sans Oblique"', '码字人日历戏剧诗歌小说'),
+          document.fonts.load('900 20px "Noto Serif SC"', '月日月日历场次戏剧'),
+          document.fonts.load('400 20px "LXGW WenKai"', '写一句今天想说的话慢慢来'),
+          document.fonts.load('400 20px "Noto Sans SC"', '场次出处摘自戏票存根')
         ]).then(boot, boot)
       } else {
         boot()
