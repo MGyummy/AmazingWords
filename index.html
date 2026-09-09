@@ -693,6 +693,56 @@
         '</g>' +
         '</svg>'
 
+      const MOON_RIVER =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#15222e"/>' +
+        '<circle cx="292" cy="84" r="48" fill="#f3e5b4" opacity=".95"/>' +
+        '<circle cx="272" cy="74" r="8" fill="#15222e" opacity=".4"/>' +
+        '<rect x="0" y="172" width="400" height="128" fill="#0d151d"/>' +
+        '<path d="M0 172 C90 156 140 184 210 172 C280 160 330 184 400 172 L400 300 L0 300 Z" fill="#101c27"/>' +
+        '<g stroke="#f3e5b4" stroke-width="3" opacity=".22">' +
+        '<path d="M268 180v54M284 180v64M300 180v50M316 180v40"/>' +
+        '</g>' +
+        '<path d="M116 232 C142 220 174 216 204 224 C224 230 240 234 254 230" stroke="#d7c38a" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+        '<path d="M118 236 L112 258 M248 230 L254 254" stroke="#d7c38a" stroke-width="4" stroke-linecap="round"/>' +
+        '<g fill="#f6f1e0" opacity=".8">' +
+        '<circle cx="64" cy="70" r="2.5"/><circle cx="96" cy="120" r="2"/><circle cx="150" cy="60" r="3"/>' +
+        '<circle cx="356" cy="52" r="2"/><circle cx="330" cy="130" r="2.5"/>' +
+        '</g>' +
+        '</svg>'
+
+      const ROAD_SUN =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#e8ddc4"/>' +
+        '<circle cx="322" cy="76" r="42" fill="#efad5a" opacity=".95"/>' +
+        '<path d="M0 210 C96 180 190 204 400 168 L400 300 L0 300 Z" fill="#9aa576"/>' +
+        '<path d="M0 260 C120 230 260 250 400 224 L400 300 L0 300 Z" fill="#6f8654"/>' +
+        '<path d="M178 300 C182 230 178 170 196 130 C210 98 224 82 232 68" stroke="#7c5f43" stroke-width="28" fill="none" stroke-linecap="round"/>' +
+        '<path d="M178 300 C182 230 178 170 196 130 C210 98 224 82 232 68" stroke="#efe4c8" stroke-width="12" fill="none" stroke-linecap="round"/>' +
+        '<g stroke="#31402d" stroke-width="3" fill="none" opacity=".65">' +
+        '<path d="M60 216 C80 200 92 190 108 184 M276 196 C300 188 326 184 356 182"/>' +
+        '</g>' +
+        '<path d="M70 126 c10 -12 24 -16 38 -10 c12 -16 40 -16 50 0 c12 -4 26 -2 34 8" stroke="#4a4634" stroke-width="3" fill="none"/>' +
+        '</svg>'
+
+      const RAIN_LAMP =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#403f3c"/>' +
+        '<rect x="226" y="38" width="142" height="164" fill="#1c2834"/>' +
+        '<rect x="226" y="38" width="142" height="164" fill="none" stroke="#5a4a37" stroke-width="9"/>' +
+        '<line x1="297" y1="38" x2="297" y2="202" stroke="#5a4a37" stroke-width="6"/>' +
+        '<line x1="226" y1="120" x2="368" y2="120" stroke="#5a4a37" stroke-width="6"/>' +
+        '<circle cx="342" cy="84" r="15" fill="#e9d9a4"/>' +
+        '<g stroke="#e6e2d8" stroke-width="2.5" opacity=".6">' +
+        '<path d="M70 36l-22 28M112 24l-22 28M170 18l-20 26M76 92l-20 26M142 84l-22 28M206 92l-22 28"/>' +
+        '</g>' +
+        '<path d="M0 300 L0 252 C118 232 210 248 400 226 L400 300 Z" fill="#675647"/>' +
+        '<path d="M96 170 L178 136 L188 182 L112 204 Z" fill="#3d5a4c"/>' +
+        '<line x1="132" y1="168" x2="140" y2="252" stroke="#33261b" stroke-width="7"/>' +
+        '<ellipse cx="150" cy="252" rx="70" ry="9" fill="#33261b"/>' +
+        '<polygon points="98,168 180,134 182,152 104,190" fill="#f1d68a" opacity=".5"/>' +
+        '</svg>'
+
       const ARTS = [
         { name: '红幕', themes: ['stage', 'drama', 'theater'], svg: CURTAIN },
         { name: '放映', themes: ['stage', 'drama', 'theater', 'film'], svg: PROJECTOR },
@@ -702,7 +752,10 @@
         { name: '春窗', themes: ['spring', 'rain', 'water', 'nature', 'poetry'], svg: SPRING_WINDOW },
         { name: '夏野', themes: ['summer', 'nature', 'foreign', 'poetry'], svg: SUMMER_FIELD },
         { name: '秋月', themes: ['autumn', 'water', 'nature', 'poetry', 'novel'], svg: AUTUMN_MOON },
-        { name: '冬夜', themes: ['winter', 'snow', 'novel', 'book', 'foreign'], svg: WINTER_NIGHT }
+        { name: '冬夜', themes: ['winter', 'snow', 'novel', 'book', 'foreign'], svg: WINTER_NIGHT },
+        { name: '月河', themes: ['moon', 'night', 'nature', 'water', 'poetry'], svg: MOON_RIVER },
+        { name: '远路', themes: ['journey', 'nature', 'winter', 'foreign', 'novel'], svg: ROAD_SUN },
+        { name: '雨灯', themes: ['rain', 'night', 'book', 'study', 'poetry'], svg: RAIN_LAMP }
       ]
 
       /* ---------------- 状态 ---------------- */
