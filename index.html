@@ -4888,27 +4888,18 @@
       }
 
       /* ---------------- 渲染 ---------------- */
-      function libraryText() {
-        const parts = []
-        QUOTES.forEach(function (q) {
-          parts.push(q.text, q.ref)
-        })
-        Object.keys(TERM_QUOTES).forEach(function (name) {
-          const q = TERM_QUOTES[name]
-          parts.push(q.text, q.ref)
-        })
-        parts.push('码字人日历戏剧诗歌电影门票存根场次出处摘自年月日星期')
-        return parts.join('')
-      }
-
       function waitRenderFonts() {
         if (!document.fonts || !document.fonts.load) return Promise.resolve()
-        const text = getQuoteText() + quoteSource() + libraryText()
+        const quoteText = '「' + getQuoteText() + '」'
+        const sansText = '—— ' + quoteSource() +
+          '码字人日历 门票存根 场次 ' +
+          state.date.year + ' ' + state.date.monthDay + ' ' +
+          state.date.weekday
         const jobs = [
           document.fonts.load(displayFont(16), '码字人日历戏剧诗歌电影'),
           document.fonts.load(font(16, '900'), state.date.monthDay + state.date.weekday + state.date.year + '年第场日月'),
-          document.fonts.load(kaiFont(16), text),
-          document.fonts.load(sansFont(16), text)
+          document.fonts.load(kaiFont(16), quoteText),
+          document.fonts.load(sansFont(16), sansText)
         ]
         const timeout = new Promise(function (resolve) {
           setTimeout(resolve, 2500)
@@ -5108,17 +5099,7 @@
           }
         })
       }
-      if (document.fonts && document.fonts.load) {
-        const lib = libraryText()
-        Promise.all([
-          document.fonts.load('400 20px "Smiley Sans Oblique"', '码字人日历戏剧诗歌电影'),
-          document.fonts.load('900 20px "Noto Serif SC"', lib),
-          document.fonts.load('400 20px "LXGW WenKai Screen"', lib),
-          document.fonts.load('400 20px "Noto Sans SC"', lib)
-        ]).then(boot, boot)
-      } else {
-        boot()
-      }
+      boot()
     })()
   </script>
 </body>
