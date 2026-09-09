@@ -1550,7 +1550,7 @@
           document.fonts.load(sansFont(16), sansText)
         ]
         const timeout = new Promise(function (resolve) {
-          setTimeout(resolve, 2500)
+          setTimeout(resolve, 8000)
         })
         return Promise.race([Promise.all(jobs), timeout])
       }
@@ -1736,10 +1736,17 @@
       })
 
       /* ---------------- 启动 ---------------- */
+      function preloadLibraryFonts() {
+        if (!document.fonts || !document.fonts.load) return
+        document.fonts.load(kaiFont(16), libraryQuoteText()).catch(function () {})
+        document.fonts.load(sansFont(16), librarySourceText()).catch(function () {})
+      }
+
       function boot() {
         loadManualFromStorage()
         syncControls()
         render().then(function () {
+          preloadLibraryFonts()
           if (document.fonts && document.fonts.ready) {
             document.fonts.ready.then(function () {
               render()
@@ -1747,16 +1754,7 @@
           }
         })
       }
-      if (document.fonts && document.fonts.load) {
-        Promise.all([
-          document.fonts.load(displayFont(16), '码字人日历戏剧诗歌电影'),
-          document.fonts.load(font(16, '900'), state.date.monthDay + state.date.weekday + state.date.year + '年第场日月'),
-          document.fonts.load(kaiFont(16), libraryQuoteText()),
-          document.fonts.load(sansFont(16), librarySourceText())
-        ]).then(boot, boot)
-      } else {
-        boot()
-      }
+      boot()
     })()
   </script>
 </body>
