@@ -2,7 +2,7 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>码字人日历 · 戏剧·诗歌·电影</title>
   <style>
     @import url('fonts/smiley/font.css');
@@ -21,6 +21,10 @@
       --line: rgba(40, 38, 31, .16);
     }
     * { box-sizing: border-box; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
     body {
       margin: 0;
       min-height: 100vh;
@@ -148,7 +152,7 @@
       background: #fffaf0;
       color: var(--ink);
       font: inherit;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.7;
       padding: 10px 12px;
     }
@@ -296,196 +300,3854 @@
 
       /* ---------------- 素材 ---------------- */
       const QUOTES = [
-        {
-          text: '蒹葭苍苍，白露为霜。所谓伊人，在水一方。',
-          type: '诗歌',
-          ref: '《诗经·秦风·蒹葭》',
-          origin: '中',
-          themes: ['autumn', 'nature', 'water', 'poetry']
-        },
-        {
-          text: '渡头余落日，墟里上孤烟。',
-          type: '诗歌',
-          ref: '王维《辋川闲居赠裴秀才迪》',
-          origin: '中',
-          themes: ['autumn', 'nature', 'water', 'poetry']
-        },
-        {
-          text: '桃花流水窅然去，别有天地非人间。',
-          type: '诗歌',
-          ref: '李白《山中问答》',
-          origin: '中',
-          themes: ['spring', 'nature', 'water', 'poetry']
-        },
-        {
-          text: '原来姹紫嫣红开遍，似这般都付与断井颓垣。',
-          type: '话剧',
-          ref: '汤显祖《牡丹亭·惊梦》',
-          origin: '中',
-          themes: ['stage', 'drama', 'spring', 'poetry']
-        },
-        {
-          text: '眼看他起朱楼，眼看他宴宾客，眼看他楼塌了。',
-          type: '话剧',
-          ref: '孔尚任《桃花扇·余韵》',
-          origin: '中',
-          themes: ['stage', 'drama', 'autumn', 'novel']
-        },
-        {
-          text: '满纸荒唐言，一把辛酸泪。都云作者痴，谁解其中味。',
-          type: '小说',
-          ref: '曹雪芹《红楼梦·第一回》',
-          origin: '中',
-          themes: ['novel', 'book', 'study', 'autumn']
-        },
-        {
-          text: '会心处，不必在远。翳然林水，便自有濠濮闲想也。',
-          type: '小说',
-          ref: '《世说新语·言语》',
-          origin: '中',
-          themes: ['novel', 'nature', 'water', 'autumn']
-        },
-        {
-          text: '采菊东篱下，悠然见南山。',
-          type: '诗歌',
-          ref: '陶渊明《饮酒·其五》',
-          origin: '中',
-          themes: ['autumn', 'nature', 'poetry']
-        },
-        {
-          text: '回首向来萧瑟处，归去，也无风雨也无晴。',
-          type: '诗歌',
-          ref: '苏轼《定风波》',
-          origin: '中',
-          themes: ['rain', 'nature', 'poetry']
-        },
-        {
-          text: '全世界是一个舞台，所有的男男女女不过是演员。',
-          type: '话剧',
-          ref: '莎士比亚《皆大欢喜》第二幕第七场',
-          origin: '外',
-          themes: ['stage', 'drama', 'foreign']
-        },
-        {
-          text: '我们都在阴沟里，可是总有人还在仰望星空。',
-          type: '话剧',
-          ref: '王尔德《温夫人的扇子》',
-          origin: '外',
-          themes: ['stage', 'drama', 'foreign', 'novel']
-        },
-        {
-          text: '使生如夏花之绚烂，死如秋叶之静美。',
-          type: '诗歌',
-          ref: '泰戈尔《飞鸟集》',
-          origin: '外',
-          themes: ['summer', 'autumn', 'nature', 'foreign', 'poetry']
-        },
-        {
-          text: '幸福的家庭都是相似的，不幸的家庭各有各的不幸。',
-          type: '小说',
-          ref: '托尔斯泰《安娜·卡列尼娜》',
-          origin: '外',
-          themes: ['novel', 'book', 'foreign']
-        },
-        {
-          text: '凡事都有定期，天下万物都有定时。',
-          type: '外国典籍',
-          ref: '《圣经·传道书》3:1',
-          origin: '外',
-          themes: ['time', 'season', 'foreign', 'nature']
-        },
-        {
-          text: '人有悲欢离合，月有阴晴圆缺，此事古难全。',
-          type: '诗歌',
-          ref: '苏轼《水调歌头》',
-          origin: '中',
-          themes: ['autumn', 'moon', 'nature', 'poetry']
-        },
-        {
-          text: '众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。',
-          type: '诗歌',
-          ref: '辛弃疾《青玉案·元夕》',
-          origin: '中',
-          themes: ['spring', 'night', 'nature', 'poetry']
-        },
-        {
-          text: '知否，知否？应是绿肥红瘦。',
-          type: '诗歌',
-          ref: '李清照《如梦令》',
-          origin: '中',
-          themes: ['spring', 'nature', 'rain', 'poetry']
-        },
-        {
-          text: '劝君更尽一杯酒，西出阳关无故人。',
-          type: '诗歌',
-          ref: '王维《送元二使安西》',
-          origin: '中',
-          themes: ['autumn', 'journey', 'nature', 'poetry']
-        },
-        {
-          text: '露从今夜白，月是故乡明。',
-          type: '诗歌',
-          ref: '杜甫《月夜忆舍弟》',
-          origin: '中',
-          themes: ['autumn', 'moon', 'nature', 'poetry']
-        },
-        {
-          text: '开轩面场圃，把酒话桑麻。',
-          type: '诗歌',
-          ref: '孟浩然《过故人庄》',
-          origin: '中',
-          themes: ['summer', 'nature', 'poetry']
-        },
-        {
-          text: '无可奈何花落去，似曾相识燕归来。',
-          type: '诗歌',
-          ref: '晏殊《浣溪沙》',
-          origin: '中',
-          themes: ['spring', 'autumn', 'nature', 'poetry']
-        },
-        {
-          text: '问渠那得清如许？为有源头活水来。',
-          type: '诗歌',
-          ref: '朱熹《观书有感》',
-          origin: '中',
-          themes: ['water', 'book', 'novel', 'poetry']
-        },
-        {
-          text: '忽如一夜春风来，千树万树梨花开。',
-          type: '诗歌',
-          ref: '岑参《白雪歌送武判官归京》',
-          origin: '中',
-          themes: ['winter', 'nature', 'poetry']
-        },
-        {
-          text: '情不知所起，一往而深。',
-          type: '话剧',
-          ref: '汤显祖《牡丹亭·题记》',
-          origin: '中',
-          themes: ['stage', 'drama', 'spring', 'poetry']
-        },
-        {
-          text: '世事洞明皆学问，人情练达即文章。',
-          type: '小说',
-          ref: '曹雪芹《红楼梦》',
-          origin: '中',
-          themes: ['novel', 'book', 'study']
-        },
-        {
-          text: '希望本是无所谓有，无所谓无的。这正如地上的路；其实地上本没有路，走的人多了，也便成了路。',
-          type: '小说',
-          ref: '鲁迅《故乡》',
-          origin: '中',
-          themes: ['novel', 'journey', 'winter', 'nature']
-        },
-        {
-          text: '这是最好的时代，这是最坏的时代。',
-          type: '小说',
-          ref: '狄更斯《双城记》',
-          origin: '外',
-          themes: ['novel', 'book', 'foreign', 'time']
-        }
-      ]
+             {
+              "text": "蒹葭苍苍，白露为霜。所谓伊人，在水一方。",
+              "type": "诗歌",
+              "ref": "《诗经·秦风·蒹葭》",
+              "origin": "中",
+              "themes": [
+               "autumn",
+               "nature",
+               "water",
+               "poetry"
+              ]
+             },
+             {
+              "text": "渡头余落日，墟里上孤烟。",
+              "type": "诗歌",
+              "ref": "王维《辋川闲居赠裴秀才迪》",
+              "origin": "中",
+              "themes": [
+               "autumn",
+               "nature",
+               "water",
+               "poetry"
+              ]
+             },
+             {
+              "text": "桃花流水窅然去，别有天地非人间。",
+              "type": "诗歌",
+              "ref": "李白《山中问答》",
+              "origin": "中",
+              "themes": [
+               "spring",
+               "nature",
+               "water",
+               "poetry"
+              ]
+             },
+             {
+              "text": "原来姹紫嫣红开遍，似这般都付与断井颓垣。",
+              "type": "话剧",
+              "ref": "汤显祖《牡丹亭·惊梦》",
+              "origin": "中",
+              "themes": [
+               "stage",
+               "drama",
+               "spring",
+               "poetry"
+              ]
+             },
+             {
+              "text": "眼看他起朱楼，眼看他宴宾客，眼看他楼塌了。",
+              "type": "话剧",
+              "ref": "孔尚任《桃花扇·余韵》",
+              "origin": "中",
+              "themes": [
+               "stage",
+               "drama",
+               "autumn",
+               "novel"
+              ]
+             },
+             {
+              "text": "满纸荒唐言，一把辛酸泪。都云作者痴，谁解其中味。",
+              "type": "小说",
+              "ref": "曹雪芹《红楼梦·第一回》",
+              "origin": "中",
+              "themes": [
+               "novel",
+               "book",
+               "study",
+               "autumn"
+              ]
+             },
+             {
+              "text": "会心处，不必在远。翳然林水，便自有濠濮闲想也。",
+              "type": "小说",
+              "ref": "《世说新语·言语》",
+              "origin": "中",
+              "themes": [
+               "novel",
+               "nature",
+               "water",
+               "autumn"
+              ]
+             },
+             {
+              "text": "采菊东篱下，悠然见南山。",
+              "type": "诗歌",
+              "ref": "陶渊明《饮酒·其五》",
+              "origin": "中",
+              "themes": [
+               "autumn",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "回首向来萧瑟处，归去，也无风雨也无晴。",
+              "type": "诗歌",
+              "ref": "苏轼《定风波》",
+              "origin": "中",
+              "themes": [
+               "rain",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "全世界是一个舞台，所有的男男女女不过是演员。",
+              "type": "话剧",
+              "ref": "莎士比亚《皆大欢喜》第二幕第七场",
+              "origin": "外",
+              "themes": [
+               "stage",
+               "drama",
+               "foreign"
+              ]
+             },
+             {
+              "text": "我们都在阴沟里，可是总有人还在仰望星空。",
+              "type": "话剧",
+              "ref": "王尔德《温夫人的扇子》",
+              "origin": "外",
+              "themes": [
+               "stage",
+               "drama",
+               "foreign",
+               "novel"
+              ]
+             },
+             {
+              "text": "使生如夏花之绚烂，死如秋叶之静美。",
+              "type": "诗歌",
+              "ref": "泰戈尔《飞鸟集》",
+              "origin": "外",
+              "themes": [
+               "summer",
+               "autumn",
+               "nature",
+               "foreign",
+               "poetry"
+              ]
+             },
+             {
+              "text": "幸福的家庭都是相似的，不幸的家庭各有各的不幸。",
+              "type": "小说",
+              "ref": "托尔斯泰《安娜·卡列尼娜》",
+              "origin": "外",
+              "themes": [
+               "novel",
+               "book",
+               "foreign"
+              ]
+             },
+             {
+              "text": "凡事都有定期，天下万物都有定时。",
+              "type": "外国典籍",
+              "ref": "《圣经·传道书》3:1",
+              "origin": "外",
+              "themes": [
+               "time",
+               "season",
+               "foreign",
+               "nature"
+              ]
+             },
+             {
+              "text": "人有悲欢离合，月有阴晴圆缺，此事古难全。",
+              "type": "诗歌",
+              "ref": "苏轼《水调歌头》",
+              "origin": "中",
+              "themes": [
+               "autumn",
+               "moon",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。",
+              "type": "诗歌",
+              "ref": "辛弃疾《青玉案·元夕》",
+              "origin": "中",
+              "themes": [
+               "spring",
+               "night",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "知否，知否？应是绿肥红瘦。",
+              "type": "诗歌",
+              "ref": "李清照《如梦令》",
+              "origin": "中",
+              "themes": [
+               "spring",
+               "nature",
+               "rain",
+               "poetry"
+              ]
+             },
+             {
+              "text": "劝君更尽一杯酒，西出阳关无故人。",
+              "type": "诗歌",
+              "ref": "王维《送元二使安西》",
+              "origin": "中",
+              "themes": [
+               "autumn",
+               "journey",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "露从今夜白，月是故乡明。",
+              "type": "诗歌",
+              "ref": "杜甫《月夜忆舍弟》",
+              "origin": "中",
+              "themes": [
+               "autumn",
+               "moon",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "开轩面场圃，把酒话桑麻。",
+              "type": "诗歌",
+              "ref": "孟浩然《过故人庄》",
+              "origin": "中",
+              "themes": [
+               "summer",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "无可奈何花落去，似曾相识燕归来。",
+              "type": "诗歌",
+              "ref": "晏殊《浣溪沙》",
+              "origin": "中",
+              "themes": [
+               "spring",
+               "autumn",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "问渠那得清如许？为有源头活水来。",
+              "type": "诗歌",
+              "ref": "朱熹《观书有感》",
+              "origin": "中",
+              "themes": [
+               "water",
+               "book",
+               "novel",
+               "poetry"
+              ]
+             },
+             {
+              "text": "忽如一夜春风来，千树万树梨花开。",
+              "type": "诗歌",
+              "ref": "岑参《白雪歌送武判官归京》",
+              "origin": "中",
+              "themes": [
+               "winter",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "情不知所起，一往而深。",
+              "type": "话剧",
+              "ref": "汤显祖《牡丹亭·题记》",
+              "origin": "中",
+              "themes": [
+               "stage",
+               "drama",
+               "spring",
+               "poetry"
+              ]
+             },
+             {
+              "text": "世事洞明皆学问，人情练达即文章。",
+              "type": "小说",
+              "ref": "曹雪芹《红楼梦》",
+              "origin": "中",
+              "themes": [
+               "novel",
+               "book",
+               "study"
+              ]
+             },
+             {
+              "text": "希望本是无所谓有，无所谓无的。这正如地上的路；其实地上本没有路，走的人多了，也便成了路。",
+              "type": "小说",
+              "ref": "鲁迅《故乡》",
+              "origin": "中",
+              "themes": [
+               "novel",
+               "journey",
+               "winter",
+               "nature"
+              ]
+             },
+             {
+              "text": "这是最好的时代，这是最坏的时代。",
+              "type": "小说",
+              "ref": "狄更斯《双城记》",
+              "origin": "外",
+              "themes": [
+               "novel",
+               "book",
+               "foreign",
+               "time"
+              ]
+             },
+             {
+              "text": "像针尖上一滴水滴在大海里，我的日子滴在时间的流里，没有声音，也没有影子。",
+              "type": "现代散文",
+              "ref": "朱自清《匆匆》",
+              "origin": "中",
+              "themes": [
+               "time",
+               "book",
+               "study",
+               "poetry"
+              ]
+             },
+             {
+              "text": "我与父亲不相见已二年余了，我最不能忘记的是他的背影。",
+              "type": "现代散文",
+              "ref": "朱自清《背影》",
+              "origin": "中",
+              "themes": [
+               "journey",
+               "book",
+               "study"
+              ]
+             },
+             {
+              "text": "悄悄的我走了，正如我悄悄的来；我挥一挥衣袖，不带走一片云彩。",
+              "type": "现代诗歌",
+              "ref": "徐志摩《再别康桥》",
+              "origin": "中",
+              "themes": [
+               "water",
+               "spring",
+               "nature",
+               "poetry"
+              ]
+             },
+             {
+              "text": "你我相逢在黑夜的海上，你有你的，我有我的，方向。",
+              "type": "现代诗歌",
+              "ref": "徐志摩《偶然》",
+              "origin": "中",
+              "themes": [
+               "night",
+               "nature",
+               "water",
+               "poetry"
+              ]
+             },
+             {
+              "text": "你是爱，是暖，是希望，你是人间的四月天！",
+              "type": "现代诗歌",
+              "ref": "林徽因《你是人间的四月天》",
+              "origin": "中",
+              "themes": [
+               "spring",
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "撑着油纸伞，独自彷徨在悠长、悠长又寂寥的雨巷。",
+              "type": "现代诗歌",
+              "ref": "戴望舒《雨巷》",
+              "origin": "中",
+              "themes": [
+               "rain",
+               "spring",
+               "poetry"
+              ]
+             },
+             {
+              "text": "北国的秋，却特别地来得清，来得静，来得悲凉。",
+              "type": "现代散文",
+              "ref": "郁达夫《故都的秋》",
+              "origin": "中",
+              "themes": [
+               "autumn",
+               "nature"
+              ]
+             },
+             {
+              "text": "人要做有用的人，不要做只讲体面，而对别人没有好处的人。",
+              "type": "现代散文",
+              "ref": "许地山《落花生》",
+              "origin": "中",
+              "themes": [
+               "book",
+               "study"
+              ]
+             },
+             {
+              "text": "故乡对于我并没有什么特别的情分，只因朝夕会面，遂成相识。",
+              "type": "现代散文",
+              "ref": "周作人《故乡的野菜》",
+              "origin": "中",
+              "themes": [
+               "nature",
+               "spring",
+               "book"
+              ]
+             },
+             {
+              "text": "一个老城，有山有水，全在天底下晒着阳光，暖和安适地睡着。",
+              "type": "现代散文",
+              "ref": "老舍《济南的冬天》",
+              "origin": "中",
+              "themes": [
+               "winter",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "真的猛士，敢于直面惨淡的人生，敢于正视淋漓的鲜血。",
+              "type": "现代散文",
+              "ref": "鲁迅《记念刘和珍君》",
+              "origin": "中",
+              "themes": [
+               "novel",
+               "book",
+               "time"
+              ]
+             },
+             {
+              "text": "希望是有羽毛的东西，栖息在灵魂里。",
+              "type": "诗歌",
+              "ref": "狄金森《希望》",
+              "origin": "外",
+              "themes": [
+               "foreign",
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "凡是有钱的单身汉，总想娶位太太，这已经成了一条举世公认的真理。",
+              "type": "小说",
+              "ref": "奥斯汀《傲慢与偏见》",
+              "origin": "外",
+              "themes": [
+               "novel",
+               "foreign",
+               "book"
+              ]
+             },
+             {
+              "text": "所有的大人都曾经是小孩，虽然，只有少数的人记得。",
+              "type": "小说",
+              "ref": "圣埃克苏佩里《小王子》",
+              "origin": "外",
+              "themes": [
+               "foreign",
+               "novel",
+               "book",
+               "poetry"
+              ]
+             },
+             {
+              "text": "画楼吹笛妓，金椀酒家胡。",
+              "type": "诗歌",
+              "ref": "王维《过崔驸马山池》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "岩壑转微迳，云林隐法堂。",
+              "type": "诗歌",
+              "ref": "王维《过福禅师兰若》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "不知香积寺，数里入云峰。",
+              "type": "诗歌",
+              "ref": "王维《过香积寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "暮持筇竹杖，相待虎谿头。",
+              "type": "诗歌",
+              "ref": "王维《过感化寺昙兴上人山院》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "龙钟一老翁，徐步谒禅宫。",
+              "type": "诗歌",
+              "ref": "王维《夏日过青龙寺谒操禅师》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "竹径从初地，莲峰出化城。",
+              "type": "诗歌",
+              "ref": "王维《登辨觉寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "下阶欲离别，相对映兰丛。",
+              "type": "诗歌",
+              "ref": "王缙《古离别》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "林间青雀儿，来往翩翩绕一枝。",
+              "type": "诗歌",
+              "ref": "王缙《青雀歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "林中空寂舍，阶下终南山。",
+              "type": "诗歌",
+              "ref": "王缙《同王昌龄裴迪游青龙寺昙壁上人兄院集和兄维》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "山月晓仍在，林风凉不绝。",
+              "type": "诗歌",
+              "ref": "王缙《别辋川别业》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "身名不问十年余，老大谁能更读书。",
+              "type": "诗歌",
+              "ref": "王缙《与卢员外象过崔处士兴宗林亭》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "莫将边地比京都，八月严霜草已枯。",
+              "type": "诗歌",
+              "ref": "王缙《九日作》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "water"
+              ]
+             },
+             {
+              "text": "灵境信为绝，法堂出尘氛。",
+              "type": "诗歌",
+              "ref": "裴迪《青龙寺昙壁上人院集》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "动息自适性，不曾妄与燕雀群。",
+              "type": "诗歌",
+              "ref": "裴迪《青雀歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "不远灞陵边，安居向十年。",
+              "type": "诗歌",
+              "ref": "裴迪《游感化寺昙兴上人山院》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "安禅一室内，左右竹亭幽。",
+              "type": "诗歌",
+              "ref": "裴迪《夏日过青龙寺谒操禅师》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "恨不逢君出荷蓑，青松白屋更无他。",
+              "type": "诗歌",
+              "ref": "裴迪《春日与王右丞过新昌里访吕逸人不遇》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "summer"
+              ]
+             },
+             {
+              "text": "结庐古城下，时登古城上。",
+              "type": "诗歌",
+              "ref": "裴迪《辋川集二十首孟城坳》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "行苦神亦秀，泠然谿上松。",
+              "type": "诗歌",
+              "ref": "崔兴宗《同王右丞送瑗公南归》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "青扈绕青林，翩翾陋体一微禽。",
+              "type": "诗歌",
+              "ref": "崔兴宗《青雀歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "未央朝谒正逶迤，天上樱桃锡此时。",
+              "type": "诗歌",
+              "ref": "崔兴宗《和王维敕赐百官樱桃》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "驻马欲分襟，清寒御沟上。",
+              "type": "诗歌",
+              "ref": "崔兴宗《留别王维》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter"
+              ]
+             },
+             {
+              "text": "穷巷空林常闭关，悠然独卧对前山。",
+              "type": "诗歌",
+              "ref": "崔兴宗《酬王维卢象见过林亭》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "天子念西疆，咨君去不遑。",
+              "type": "诗歌",
+              "ref": "苑咸《送大理正摄御史判凉州别驾》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "莲花梵字本从天，华省仙郎早悟禅。",
+              "type": "诗歌",
+              "ref": "苑咸《酬王维》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "绝顶一茅茨，直[上]三十里。",
+              "type": "诗歌",
+              "ref": "丘为《寻西山隐者不遇》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "东风何时至，已绿湖上山。",
+              "type": "诗歌",
+              "ref": "丘为《题农父庐舍》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "结庐若耶里，左右若耶水。",
+              "type": "诗歌",
+              "ref": "丘为《泛若耶谿》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "日日湖水上，好登湖上楼。",
+              "type": "诗歌",
+              "ref": "丘为《湖中寄王侍御》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "天末江城晚，登临客望迷。",
+              "type": "诗歌",
+              "ref": "丘为《登润州城》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "日高鸡犬静，门掩向寒塘。",
+              "type": "诗歌",
+              "ref": "丘为《寻庐山崔征君》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter"
+              ]
+             },
+             {
+              "text": "西掖承休澣，东隅返故林。",
+              "type": "诗歌",
+              "ref": "赵骅《送晁补阙归日本国》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "少年负胆气，好勇复知机。",
+              "type": "诗歌",
+              "ref": "崔颢《古游侠呈军中诸将》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "悠悠远行归，经春涉长道。",
+              "type": "诗歌",
+              "ref": "崔颢《赠轻车》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "三十羽林将，出身常事边。",
+              "type": "诗歌",
+              "ref": "崔颢《赠王威古》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "法师东南秀，世实豪家子。",
+              "type": "诗歌",
+              "ref": "崔颢《赠怀一上人》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "晨登天竺山，山殿朝阳晓。",
+              "type": "诗歌",
+              "ref": "崔颢《游天竺寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "轻舟去何疾，已到云林境。",
+              "type": "诗歌",
+              "ref": "崔颢《入若耶溪》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "夫差日淫放，举国求妃嫔。",
+              "type": "诗歌",
+              "ref": "祖咏《古意二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "楚王竟何去，独自留巫山。",
+              "type": "诗歌",
+              "ref": "祖咏《古意二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "天色混波涛，岸阴匝村墅。",
+              "type": "诗歌",
+              "ref": "祖咏《渡淮河寄平一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "淹留岁将[晏]，久废南山期。",
+              "type": "诗歌",
+              "ref": "祖咏《归汝坟山庄留别卢象》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "前路入郑郊，尚经百余里。",
+              "type": "诗歌",
+              "ref": "祖咏《夕次圃田店》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "旧居东臯上，左右俯荒村。",
+              "type": "诗歌",
+              "ref": "祖咏《田家即事》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "九嶷日已暮，三湘云复愁。",
+              "type": "诗歌",
+              "ref": "李颀《湘夫人》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "黄云雁门郡，日暮风沙里。",
+              "type": "诗歌",
+              "ref": "李颀《塞下曲》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "行人朝走马，直指蓟城傍。",
+              "type": "诗歌",
+              "ref": "李颀《古塞下曲》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "白首何老人，蓑笠蔽其身。",
+              "type": "诗歌",
+              "ref": "李颀《渔父歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "濩落久无用，隐身甘采薇。",
+              "type": "诗歌",
+              "ref": "李颀《东京寄万楚》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "得道凡百岁，烧丹惟一身。",
+              "type": "诗歌",
+              "ref": "李颀《寄焦炼师》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "自为洛阳客，夫子吾知音。",
+              "type": "诗歌",
+              "ref": "綦毋潜《冬夜寓居寄储太祝》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "幽意无断绝，此去随所偶。",
+              "type": "诗歌",
+              "ref": "綦毋潜《春泛若耶溪》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "道林隐形胜，向背临层霄。",
+              "type": "诗歌",
+              "ref": "綦毋潜《题鹤林寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "南山势回合，灵境依此住。",
+              "type": "诗歌",
+              "ref": "綦毋潜《题栖霞寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "西坂何缭绕，青林问子家。",
+              "type": "诗歌",
+              "ref": "綦毋潜《送储十二还庄城》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "长安渭桥路，行客别时心。",
+              "type": "诗歌",
+              "ref": "綦毋潜《送章彝下第》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "遐方献文犀，万里随南金。",
+              "type": "诗歌",
+              "ref": "储光羲《述韦昭应画犀牛》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "入与真主言，有骑天马来。",
+              "type": "诗歌",
+              "ref": "储光羲《献王威仪》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "啧啧野田雀，不知躯体微。",
+              "type": "诗歌",
+              "ref": "储光羲《野田黄雀行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "山北饶朽木，山南多枯枝。",
+              "type": "诗歌",
+              "ref": "储光羲《樵父词》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "泽鱼好鸣水，溪鱼好上流。",
+              "type": "诗歌",
+              "ref": "储光羲《渔父词》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "不言牧田远，不道牧陂深。",
+              "type": "诗歌",
+              "ref": "储光羲《牧童词》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "向晚横吹悲，风动马嘶合。",
+              "type": "诗歌",
+              "ref": "王昌龄《变行路难》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "蝉鸣空桑林，八月萧关道。",
+              "type": "诗歌",
+              "ref": "王昌龄《塞下曲四首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "summer",
+               "water"
+              ]
+             },
+             {
+              "text": "饮马渡秋水，水寒风似刀。",
+              "type": "诗歌",
+              "ref": "王昌龄《塞下曲四首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "winter",
+               "water"
+              ]
+             },
+             {
+              "text": "奉诏甘泉宫，总征天下兵。",
+              "type": "诗歌",
+              "ref": "王昌龄《塞下曲四首三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "边头何惨惨，已葬霍将军。",
+              "type": "诗歌",
+              "ref": "王昌龄《塞下曲四首四》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "秋风夜渡河，吹却鴈门桑。",
+              "type": "诗歌",
+              "ref": "王昌龄《塞上曲》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "water",
+               "night"
+              ]
+             },
+             {
+              "text": "圣代多才俊，陆生何考槃。",
+              "type": "诗歌",
+              "ref": "常建《送陆擢》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "泠泠花下琴，君唱渡江吟。",
+              "type": "诗歌",
+              "ref": "常建《送李十一尉临溪》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "water"
+              ]
+             },
+             {
+              "text": "江上调玉琴，一弦清一心。",
+              "type": "诗歌",
+              "ref": "常建《江上琴兴》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "湖广舟自轻，江天欲澄霁。",
+              "type": "诗歌",
+              "ref": "常建《湖中晚霁》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "清溪深不测，隐处唯孤云。",
+              "type": "诗歌",
+              "ref": "常建《宿王昌龄隐居》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "微风吹霜气，寒影明前除。",
+              "type": "诗歌",
+              "ref": "常建《送楚十少府》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "winter"
+              ]
+             },
+             {
+              "text": "秋草马蹄轻，角弓持弦急。",
+              "type": "诗歌",
+              "ref": "杜𬱟《从军行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "君不见铜鞮观，数里城池已芜漫。",
+              "type": "诗歌",
+              "ref": "杜𬱟《故绛行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "十八羽林郎，戎衣侍汉王。",
+              "type": "诗歌",
+              "ref": "李嶷《少年行三首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "侍猎长杨下，承恩更射飞。",
+              "type": "诗歌",
+              "ref": "李嶷《少年行三首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "玉劒膝边横，金杯马上倾。",
+              "type": "诗歌",
+              "ref": "李嶷《少年行三首三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "天净河汉高，夜闲砧杵发。",
+              "type": "诗歌",
+              "ref": "李嶷《淮南秋夜呈周偘》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water",
+               "night"
+              ]
+             },
+             {
+              "text": "林卧避残暑，白云长在天。",
+              "type": "诗歌",
+              "ref": "李嶷《林园秋夜作》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "summer"
+              ]
+             },
+             {
+              "text": "人录尚书事，家临御路傍。",
+              "type": "诗歌",
+              "ref": "李嶷《读前汉外戚传》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "夜尽梦初惊，纱窗早雾明。",
+              "type": "诗歌",
+              "ref": "崔亘《春怨》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "night"
+              ]
+             },
+             {
+              "text": "美人怨何深，含情倚金阁。",
+              "type": "诗歌",
+              "ref": "蒋维翰《古歌二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "美人闭红烛，独作裁新锦。",
+              "type": "诗歌",
+              "ref": "蒋维翰《古歌二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "night"
+              ]
+             },
+             {
+              "text": "珠箔因风起，飞蛾入最能。",
+              "type": "诗歌",
+              "ref": "蒋维翰《春夜裁缝》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "白玉堂前一树梅，今朝忽见数花开。",
+              "type": "诗歌",
+              "ref": "蒋维翰《春女怨》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "winter"
+              ]
+             },
+             {
+              "text": "百尺珠楼临狭斜，新妆能唱美人车。",
+              "type": "诗歌",
+              "ref": "蒋维翰《怨歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "人说淮南有小山，淮王昔日此登仙。",
+              "type": "诗歌",
+              "ref": "万楚《小山歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "田家喜秋熟，岁[晏]林叶稀。",
+              "type": "诗歌",
+              "ref": "万楚《题江潮庄壁》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "玳瑁昔称华，玲珑薄绛纱。",
+              "type": "诗歌",
+              "ref": "万楚《咏帘》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "山阴柳家女，九日采茱萸。",
+              "type": "诗歌",
+              "ref": "万楚《茱萸女》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "西施谩道浣春纱，碧玉今时鬬丽华。",
+              "type": "诗歌",
+              "ref": "万楚《五日观妓》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "金络青骢白玉鞍，长鞭紫陌野游盘。",
+              "type": "诗歌",
+              "ref": "万楚《骢马》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "水势临阶转，峰形对路开。",
+              "type": "诗歌",
+              "ref": "范朝《宁王山池》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "胜境宜长望，迟春好散愁。",
+              "type": "诗歌",
+              "ref": "范朝《题石瓮寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "小园足生事，寻胜日倾壶。",
+              "type": "诗歌",
+              "ref": "杨颜《田家》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "君不见红闺少女端正时，夭夭桃李仙容姿。",
+              "type": "诗歌",
+              "ref": "王𬤇《后庭怨》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "调筝夜坐灯光里，却挂罗帷露纤指。",
+              "type": "诗歌",
+              "ref": "王𬤇《夜坐看搊筝》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "night"
+              ]
+             },
+             {
+              "text": "飞燕倚身轻，争人巧笑名。",
+              "type": "诗歌",
+              "ref": "王𬤇《长信怨》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "日暮裁缝歇，深嫌气力微。",
+              "type": "诗歌",
+              "ref": "王𬤇《闺情》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "暂得金吾夜，通看火树春。",
+              "type": "诗歌",
+              "ref": "王𬤇《十五夜观灯》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "night"
+              ]
+             },
+             {
+              "text": "今岁今宵尽，明年明日催。",
+              "type": "诗歌",
+              "ref": "王𬤇《除夜》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "建礼含香处，重城待漏臣。",
+              "type": "诗歌",
+              "ref": "王岳灵《闻漏》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "往日长安路，欢游不惜年。",
+              "type": "诗歌",
+              "ref": "周万《送沈芳谒李观察求仕进》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "进军飞狐北，穷寇势将变。",
+              "type": "诗歌",
+              "ref": "陶翰《古塞下曲》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "请君留楚调，听我吟燕歌。",
+              "type": "诗歌",
+              "ref": "陶翰《燕歌行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "行吏到西华，乃观三峰壮。",
+              "type": "诗歌",
+              "ref": "陶翰《望太华赠卢司仓》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "骢马拂绣裳，按兵辽水阳。",
+              "type": "诗歌",
+              "ref": "陶翰《赠郑员外》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "志士固不羁，与道常周旋。",
+              "type": "诗歌",
+              "ref": "陶翰《赠房侍御》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "退无偃息资，进无当代策。",
+              "type": "诗歌",
+              "ref": "陶翰《晚出伊阙寄河南裴中丞》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "日暮苍山远，天寒白屋贫。",
+              "type": "诗歌",
+              "ref": "刘长卿《逢雪宿芙蓉山主人》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter"
+              ]
+             },
+             {
+              "text": "朝无寒士达，家在旧山贫。",
+              "type": "诗歌",
+              "ref": "刘长卿《送张起崔载华之闽中》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter"
+              ]
+             },
+             {
+              "text": "群公谁让位，五柳独知贫。",
+              "type": "诗歌",
+              "ref": "刘长卿《赠秦系征君》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "月明花满地，君自忆山阴。",
+              "type": "诗歌",
+              "ref": "刘长卿《夜中对雪赠秦系时秦初与谢氏离婚谢氏在越》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "water"
+              ]
+             },
+             {
+              "text": "帝子不可见，秋风来暮思。",
+              "type": "诗歌",
+              "ref": "刘长卿《湘妃》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "苍梧千载后，斑竹对湘沅。",
+              "type": "诗歌",
+              "ref": "刘长卿《斑竹》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "杼山多幽绝，胜事盈跬步。",
+              "type": "诗歌",
+              "ref": "颜真卿《题杼山癸亭得暮字》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "群子游杼山，山寒桂花白。",
+              "type": "诗歌",
+              "ref": "颜真卿《谢陆处士杼山折青桂花见寄之什》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "winter"
+              ]
+             },
+             {
+              "text": "大君制六合，猛将清九垓。",
+              "type": "诗歌",
+              "ref": "颜真卿《赠裴将军》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "秋意西山多，别岑萦左次。",
+              "type": "诗歌",
+              "ref": "颜真卿《赠僧皎然》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "张良思报韩，龚胜耻事新。",
+              "type": "诗歌",
+              "ref": "颜真卿《咏陶渊明》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "上人居此寺，不出三十年。",
+              "type": "诗歌",
+              "ref": "颜真卿《使过瑶台寺有怀圆寂上人》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "黄钟扣元音，律吕更循环。",
+              "type": "诗歌",
+              "ref": "李华《杂诗六首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "玄黄与丹青，五气之正色。",
+              "type": "诗歌",
+              "ref": "李华《杂诗六首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "甘酸不私人，元和运五行。",
+              "type": "诗歌",
+              "ref": "李华《杂诗六首三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "阴魄沦宇宙，太阳假其明。",
+              "type": "诗歌",
+              "ref": "李华《杂诗六首四》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "孔光尊董贤，胡广惭李固。",
+              "type": "诗歌",
+              "ref": "李华《杂诗六首五》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "结交得书生，书生钝且直。",
+              "type": "诗歌",
+              "ref": "李华《杂诗六首六》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "我友自东，于以游从。",
+              "type": "诗歌",
+              "ref": "萧颖士《江有枫一篇十章一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "我友徂北，于以休息。",
+              "type": "诗歌",
+              "ref": "萧颖士《江有枫一篇十章二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "想彼槭矣，亦类其枫。",
+              "type": "诗歌",
+              "ref": "萧颖士《江有枫一篇十章三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "东可游矣，会之丘矣。",
+              "type": "诗歌",
+              "ref": "萧颖士《江有枫一篇十章四》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "粤东可居，彼吴之墟。",
+              "type": "诗歌",
+              "ref": "萧颖士《江有枫一篇十章五》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "我朋在矣，彼陆之子。",
+              "type": "诗歌",
+              "ref": "萧颖士《江有枫一篇十章六》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "绿笋总成竹，红花亦成子。",
+              "type": "诗歌",
+              "ref": "崔曙《古意》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "支公已寂灭，影塔山上古。",
+              "type": "诗歌",
+              "ref": "崔曙《宿大通和尚塔敬赠如上人兼呈常孙二山人》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "无媒嗟失路，有道亦乘流。",
+              "type": "诗歌",
+              "ref": "崔曙《送薛据之宋州》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "寥寥远天净，谿路何空蒙。",
+              "type": "诗歌",
+              "ref": "崔曙《山下晚晴》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "灵溪氛雾歇，皎镜清心颜。",
+              "type": "诗歌",
+              "ref": "崔曙《颍阳东溪怀古》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "东林气微白，寒鸟急高翔。",
+              "type": "诗歌",
+              "ref": "崔曙《早发交崖山还太室作》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter"
+              ]
+             },
+             {
+              "text": "鸿飞遵枉渚，鹿鸣思故群。",
+              "type": "诗歌",
+              "ref": "王翰《赠唐祖二子》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "孝成皇帝本娇奢，行幸平阳公主家。",
+              "type": "诗歌",
+              "ref": "王翰《飞燕篇》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "长安少年无远图，一生惟羡执金吾。",
+              "type": "诗歌",
+              "ref": "王翰《饮马长城窟行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "洪河之南曰秦镇，发地削成五千仞。",
+              "type": "诗歌",
+              "ref": "王翰《赋得明星玉女坛送廉察尉华阴》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "紫台穹跨连绿波，红轩铪匝垂纤罗。",
+              "type": "诗歌",
+              "ref": "王翰《春女行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "君不见宜春苑中九华殿，飞阁连连直如发。",
+              "type": "诗歌",
+              "ref": "王翰《古娥眉怨》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "朝日上高台，离人怨秋草。",
+              "type": "诗歌",
+              "ref": "孟云卿《古别离》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "结发生别离，相思复相保。",
+              "type": "诗歌",
+              "ref": "孟云卿《今别离》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "孤儿去慈亲，远客丧主人。",
+              "type": "诗歌",
+              "ref": "孟云卿《悲哉行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "少年多武力，勇气冠幽州。",
+              "type": "诗歌",
+              "ref": "孟云卿《行行且游猎篇》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "草草闾巷喧，涂车俨成位。",
+              "type": "诗歌",
+              "ref": "孟云卿《古挽歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "吾观天地图，世界亦可小。",
+              "type": "诗歌",
+              "ref": "孟云卿《放歌行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "岧嶤试一临，虏骑附城阴。",
+              "type": "诗歌",
+              "ref": "张巡《闻笛》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "接战春来苦，孤城日渐危。",
+              "type": "诗歌",
+              "ref": "张巡《守睢阳作》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "一水悠悠百粤通，片帆无奈信秋风。",
+              "type": "诗歌",
+              "ref": "张抃《题衡阳泗州寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "water"
+              ]
+             },
+             {
+              "text": "秦庭初指鹿，群盗满山东。",
+              "type": "诗歌",
+              "ref": "贺兰进明《古意二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "崇兰生涧底，香气满幽林。",
+              "type": "诗歌",
+              "ref": "贺兰进明《古意二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "君不见岩下井，百尺不及泉。",
+              "type": "诗歌",
+              "ref": "贺兰进明《行路难五首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "君不见门前柳，荣耀暂时萧索久。",
+              "type": "诗歌",
+              "ref": "贺兰进明《行路难五首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "君不见芳树枝，春花落尽蜂不窥。",
+              "type": "诗歌",
+              "ref": "贺兰进明《行路难五首三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "君不见云中月，暂盈还复缺。",
+              "type": "诗歌",
+              "ref": "贺兰进明《行路难五首四》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "舟人自相报，落日下芳潭。",
+              "type": "诗歌",
+              "ref": "闾丘晓《夜渡江》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "百越城池枕海圻，永嘉山水复相依。",
+              "type": "诗歌",
+              "ref": "庾光先《奉和刘采访缙云南岭作》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "王事纷纷无暇日，浮生冉冉只如云。",
+              "type": "诗歌",
+              "ref": "韦丹《思归寄东林澈上人》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "空山泉落松窗静，闲地草生春日迟。",
+              "type": "诗歌",
+              "ref": "韦丹《荅澈公》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "night"
+              ]
+             },
+             {
+              "text": "海内昔凋瘵，天网斯浡潏。",
+              "type": "诗歌",
+              "ref": "萧昕《洛出书》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "丽锦疋云终，襜襜展向风。",
+              "type": "诗歌",
+              "ref": "萧昕《临风舒锦》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "吉日初齐戒，灵巫穆上皇。",
+              "type": "诗歌",
+              "ref": "李希仲《东皇太一词》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "旄头有精芒，胡骑猎秋草。",
+              "type": "诗歌",
+              "ref": "李希仲《蓟北行二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "一身救边速，烽火通蓟门。",
+              "type": "诗歌",
+              "ref": "李希仲《蓟北行二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "平生志业在琴诗，头上如今有二丝。",
+              "type": "诗歌",
+              "ref": "杨志坚《送妻》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "从禽非吾乐，不好云梦田。",
+              "type": "诗歌",
+              "ref": "孟浩然《从张丞相游南纪城猎戏赠裴迪张参军》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "悠悠清水江，水落沙屿出。",
+              "type": "诗歌",
+              "ref": "孟浩然《登江中孤屿赠白云先生王迥》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "南陌春将晚，北窗犹卧病。",
+              "type": "诗歌",
+              "ref": "孟浩然《晚春卧病寄张八》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "night"
+              ]
+             },
+             {
+              "text": "北山白云里，隐者自怡悦。",
+              "type": "诗歌",
+              "ref": "孟浩然《秋登兰山寄张五》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "吾昔与尔辈，读书常闭门。",
+              "type": "诗歌",
+              "ref": "孟浩然《入峡寄弟》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "桂水通百越，扁舟期晓发。",
+              "type": "诗歌",
+              "ref": "孟浩然《湖中旅泊寄阎九司户防》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "大雅久不作，吾衰竟谁陈。",
+              "type": "诗歌",
+              "ref": "李白《古风一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "蟾蜍薄太清，蚀此瑶台月。",
+              "type": "诗歌",
+              "ref": "李白《古风二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "秦皇扫六合，虎视何雄哉。",
+              "type": "诗歌",
+              "ref": "李白《古风三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "凤飞九千仞，五章备彩珍。",
+              "type": "诗歌",
+              "ref": "李白《古风四》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "太白何苍苍，星辰上森列。",
+              "type": "诗歌",
+              "ref": "李白《古风五》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "代马不思越，越禽不恋燕。",
+              "type": "诗歌",
+              "ref": "李白《古风六》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "九月正乘秋，三杯兴已周。",
+              "type": "诗歌",
+              "ref": "中宗皇帝《九月九日幸临渭亭登高得秋字》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "water"
+              ]
+             },
+             {
+              "text": "四郊秦汉国，八水帝王都。",
+              "type": "诗歌",
+              "ref": "中宗皇帝《登骊山高顶寓目》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "眷言君失德，骊邑想秦余。",
+              "type": "诗歌",
+              "ref": "中宗皇帝《幸秦始皇陵》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "神皐福地三秦邑，玉台金阙九仙家。",
+              "type": "诗歌",
+              "ref": "中宗皇帝《立春日游苑迎春》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "润色鸿业寄贤才，叨居右弼媿盐梅。",
+              "type": "诗歌",
+              "ref": "中宗皇帝《十月诞辰内殿宴群臣效柏梁体联句》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter"
+              ]
+             },
+             {
+              "text": "三阳本是标灵纪，二室由来独擅名。",
+              "type": "诗歌",
+              "ref": "中宗皇帝《石淙》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "奇峰嶾嶙箕山北，秀崿岹峣嵩镇南。",
+              "type": "诗歌",
+              "ref": "睿宗皇帝《石淙》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "玉殿肃肃，灵芝煌煌。",
+              "type": "诗歌",
+              "ref": "肃宗皇帝《延英殿玉灵芝诗三章章八句一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "元气产芝，明神合德。",
+              "type": "诗歌",
+              "ref": "肃宗皇帝《延英殿玉灵芝诗三章章八句二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "幸生芳本，当我扆旒。",
+              "type": "诗歌",
+              "ref": "肃宗皇帝《延英殿玉灵芝诗三章章八句三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "先生年几许，颜色似童儿。",
+              "type": "诗歌",
+              "ref": "肃宗皇帝《赐棃李泌与诸王联句》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "风云喜际会，雷雨遂流滋。",
+              "type": "诗歌",
+              "ref": "文宗皇帝《暮春喜雨诗》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "良工运精思，巧极似有神。",
+              "type": "诗歌",
+              "ref": "文宗皇帝《题程修己竹障》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "辇路生春草，上林花发时。",
+              "type": "诗歌",
+              "ref": "文宗皇帝《宫中题》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "注想待元老，识君恨不早。",
+              "type": "诗歌",
+              "ref": "文宗皇帝《上巳日赐裴度》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "上元高会集群仙，心斋何事欲祈年。",
+              "type": "诗歌",
+              "ref": "文宗皇帝《上元日二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "蓂生三五叶初齐，上元羽客出桃蹊。",
+              "type": "诗歌",
+              "ref": "文宗皇帝《上元日二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "大雄真迹枕危峦，梵宇层楼耸万般。",
+              "type": "诗歌",
+              "ref": "宣宗皇帝《百丈山》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "缀玉联珠六十年，谁教冥路作诗仙。",
+              "type": "诗歌",
+              "ref": "宣宗皇帝《吊白居易》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "云散晴山几万重，烟收春色更冲融。",
+              "type": "诗歌",
+              "ref": "宣宗皇帝《幸华严寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "款塞旋征骑，和戎委庙贤。",
+              "type": "诗歌",
+              "ref": "宣宗皇帝《重阳锡宴群臣》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "大殿连云接爽溪，钟声还与鼓声齐。",
+              "type": "诗歌",
+              "ref": "宣宗皇帝《题泾县水西寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "千岩万壑不辞劳，远看方知出处高。",
+              "type": "诗歌",
+              "ref": "宣宗皇帝《瀑布联句》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "只解劈牛兼劈树，不能诛恶与诛凶。",
+              "type": "诗歌",
+              "ref": "昭宗皇帝《咏雷句》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "上苑桃花朝日明，兰闺艳妾动春情。",
+              "type": "诗歌",
+              "ref": "文德皇后《春游曲》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "仰幽岩而流盼，抚桂枝以凝想。",
+              "type": "诗歌",
+              "ref": "徐贤妃《拟小山篇》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "旧爱柏梁台，新宠昭阳殿。",
+              "type": "诗歌",
+              "ref": "徐贤妃《长门怨》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "秋风起函谷，劲气动河山。",
+              "type": "诗歌",
+              "ref": "徐贤妃《秋风函谷应诏》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "water"
+              ]
+             },
+             {
+              "text": "由来称独立，本自号倾城。",
+              "type": "诗歌",
+              "ref": "徐贤妃《赋得北方有佳人》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "朝来临镜台，粧罢暂裴回。",
+              "type": "诗歌",
+              "ref": "徐贤妃《进太宗》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "密叶因裁吐，新花逐翦舒。",
+              "type": "诗歌",
+              "ref": "上官昭容《奉和圣制立春日侍宴内殿出翦彩花应制》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "帝里重阳节，香园万乘来。",
+              "type": "诗歌",
+              "ref": "上官昭容《九月九日上幸慈恩寺登浮图群臣上菊花寿酒》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "叶下洞庭初，思君万里余。",
+              "type": "诗歌",
+              "ref": "上官昭容《彩书怨》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "释子谈经处，轩臣刻字留。",
+              "type": "诗歌",
+              "ref": "上官昭容《驾幸三会寺应制》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "三冬季月景[龙]年，万乘观风出灞川。",
+              "type": "诗歌",
+              "ref": "上官昭容《驾幸新丰温泉宫献诗三首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter",
+               "water"
+              ]
+             },
+             {
+              "text": "鸾旗掣曳拂空回，羽骑骖驔蹑景来。",
+              "type": "诗歌",
+              "ref": "上官昭容《驾幸新丰温泉宫献诗三首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "罗袖动香香不已，红蕖褭褭秋烟里。",
+              "type": "诗歌",
+              "ref": "杨贵妃《赠张云容舞》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "桂叶双眉久不描，残妆和泪汚红绡。",
+              "type": "诗歌",
+              "ref": "江妃《谢赐珍珠》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "种瓜黄台下，瓜熟子离离。",
+              "type": "诗歌",
+              "ref": "章怀太子《黄台瓜辞》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "乾象开层构，离明启少阳。",
+              "type": "诗歌",
+              "ref": "韩王元嘉《奉和同太子监守违恋》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "凤辇腾宸驾，骊籞次干游。",
+              "type": "诗歌",
+              "ref": "越王贞《奉和圣制过温汤》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "别有经行所，迥跨重峦侧。",
+              "type": "诗歌",
+              "ref": "信安王祎《石桥》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "出嫁辞乡国，由来此别难。",
+              "type": "诗歌",
+              "ref": "宜芬公主《虚池驿题屏风》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "十二层楼倚翠空，凤鸾相对立梧桐。",
+              "type": "诗歌",
+              "ref": "女学士宋氏若华《嘲陆畅》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "垂衣临八极，肃穆四门通。",
+              "type": "诗歌",
+              "ref": "尚宫宋氏若昭《奉和御制麟德殿宴百僚应制》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "端拱承休命，时清荷圣皇。",
+              "type": "诗歌",
+              "ref": "尚宫宋氏若宪《奉和御制麟德殿宴百官》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "summer"
+              ]
+             },
+             {
+              "text": "睿泽先寰海，功成展武韶。",
+              "type": "诗歌",
+              "ref": "鲍氏君徽《奉和麟德殿宴百僚应[制]》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "高高秋月明，北照辽阳城。",
+              "type": "诗歌",
+              "ref": "鲍氏君徽《关山月》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn",
+               "water"
+              ]
+             },
+             {
+              "text": "枝上花，花下人，可怜颜色俱青春。",
+              "type": "诗歌",
+              "ref": "鲍氏君徽《惜花吟》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "闲朝向晓出帘栊，茗宴东亭四望通。",
+              "type": "诗歌",
+              "ref": "鲍氏君徽《东亭茶宴》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "昨日梦君归，贱妾下鸣机。",
+              "type": "诗歌",
+              "ref": "萧妃《夜梦》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "一点分明值万金，开时惟怕冷风侵。",
+              "type": "诗歌",
+              "ref": "南唐先主李昪《咏灯》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "蓼花蘸水火不灭，水鸟惊鱼银梭投。",
+              "type": "诗歌",
+              "ref": "嗣主璟《游后湖赏莲花》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "water"
+              ]
+             },
+             {
+              "text": "灵槎思浩荡，老鹤倚崆峒。",
+              "type": "诗歌",
+              "ref": "嗣主璟《句》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "晚雨秋阴酒乍醒，感时心绪杳难平。",
+              "type": "诗歌",
+              "ref": "后主煜《九月十日偶书》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "autumn"
+              ]
+             },
+             {
+              "text": "残莺何事不知秋，横过幽林尚独游。",
+              "type": "诗歌",
+              "ref": "后主煜《秋莺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "autumn"
+              ]
+             },
+             {
+              "text": "山舍初成病乍轻，杖藜巾褐称闲情。",
+              "type": "诗歌",
+              "ref": "后主煜《病起题山舍壁》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "且维轻舸更迟迟，别酒重倾惜解携。",
+              "type": "诗歌",
+              "ref": "后主煜《送邓王二十弟从益牧宣城》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "江南江北旧家乡，三十年来梦一场。",
+              "type": "诗歌",
+              "ref": "后主煜《渡中江望石城泣下》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "珠碎眼前珍，花凋世外春。",
+              "type": "诗歌",
+              "ref": "后主煜《挽辞一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "绿影覆幽池，芳菲四月时。",
+              "type": "诗歌",
+              "ref": "韩王从善《蔷薇诗一首十八韵呈东海侍郎徐铉》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "竹林二君子，尽日竟沈吟。",
+              "type": "诗歌",
+              "ref": "吉王从谦《观棋》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "丱岁便将为肘腋，二纪何曾离一日。",
+              "type": "诗歌",
+              "ref": "蜀高祖王建《赠别唐太师道袭》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "乔岩簇冷烟，幽径上寒天。",
+              "type": "诗歌",
+              "ref": "后主衍《幸秦川上梓潼山》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter"
+              ]
+             },
+             {
+              "text": "缓辔逾双劒，行行蹑石棱。",
+              "type": "诗歌",
+              "ref": "后主衍《题劒门》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "先朝神武力开边，画断封疆四五千。",
+              "type": "诗歌",
+              "ref": "后主衍《过白卫岭和韩昭》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "辉辉赫赫浮玉云，宣华池上月华新。",
+              "type": "诗歌",
+              "ref": "后主衍《宫词》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "者边走，那边走，只是寻花柳。",
+              "type": "诗歌",
+              "ref": "后主衍《醉妆词》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "不缘朝阙去，好此结茅庐。",
+              "type": "诗歌",
+              "ref": "后主衍《句》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "三节还乡兮挂锦衣，碧天朗朗兮爱日晖。",
+              "type": "诗歌",
+              "ref": "吴越王钱镠《巡衣锦军制还乡歌》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "没了期，没了期，营基才了又仓基。",
+              "type": "诗歌",
+              "ref": "吴越王钱镠《没了期歌一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "没了期，没了期，春衣才了又冬衣。",
+              "type": "诗歌",
+              "ref": "吴越王钱镠《没了期歌二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "winter"
+              ]
+             },
+             {
+              "text": "须将一片地，付与有心人。",
+              "type": "诗歌",
+              "ref": "吴越王钱镠《句》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "廊庑周遭翠幕遮，禁林深处绝喧哗。",
+              "type": "诗歌",
+              "ref": "后王钱俶《宫中作》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "冰肌玉骨清无汗，水殿风来暗香暖。",
+              "type": "诗歌",
+              "ref": "后蜀嗣主孟昶《避暑摩诃池上作》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter",
+               "water"
+              ]
+             },
+             {
+              "text": "春色曾看紫陌头，乱红飞尽不禁愁。",
+              "type": "诗歌",
+              "ref": "闽王王继鹏《批叶翘谏书纸尾》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "早与元妃慕至化，同跻灵岳访真仙。",
+              "type": "诗歌",
+              "ref": "蜀太后徐氏《丈人观》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "千寻绿嶂夹流溪，登眺因知海岳低。",
+              "type": "诗歌",
+              "ref": "蜀太后徐氏《玄都观》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "圣帝归梧野，躬来谒圣颜。",
+              "type": "诗歌",
+              "ref": "蜀太后徐氏《丈人观谒先帝御容》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "再到金华顶，玄都访道回。",
+              "type": "诗歌",
+              "ref": "蜀太后徐氏《题金华宫》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "周回云水游丹景，因与真妃眺上方。",
+              "type": "诗歌",
+              "ref": "蜀太后徐氏《丹景山至德寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "寻真游胜境，巡礼到阳平。",
+              "type": "诗歌",
+              "ref": "蜀太后徐氏《题彭州阳平化》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "获陪翠辇喜殊常，同涉仙坛岂厌长。",
+              "type": "诗歌",
+              "ref": "蜀太妃徐氏《丈人观》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "登寻丹壑到玄都，接日红霞照座隅。",
+              "type": "诗歌",
+              "ref": "蜀太妃徐氏《玄都观》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "共谒御容仪，还同在禁闱。",
+              "type": "诗歌",
+              "ref": "蜀太妃徐氏《游丈人观谒先帝御容》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "碧烟红雾漾人衣，宿雾苍苔石径危。",
+              "type": "诗歌",
+              "ref": "蜀太妃徐氏《题金华宫》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "丹景山头宿梵宫，玉轮金辂驻虚空。",
+              "type": "诗歌",
+              "ref": "蜀太妃徐氏《和题丹景山至德寺》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "云浮翠辇届阳平，真似骖鸾到上清。",
+              "type": "诗歌",
+              "ref": "蜀太妃徐氏《题彭州阳平化》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "翩翩兮朱鹭，来泛春塘栖绿树。",
+              "type": "诗歌",
+              "ref": "张籍《鼓吹曲辞朱鹭》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "锦襜褕，绣裆襦，强强饮啄哺尔雏。",
+              "type": "诗歌",
+              "ref": "李贺《鼓吹曲辞艾如张》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "回中道路险，萧关烽候多。",
+              "type": "诗歌",
+              "ref": "卢照邻《鼓吹曲辞上之回》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "天高庆雷齐坠地，地无惊烟海千里。",
+              "type": "诗歌",
+              "ref": "李贺《鼓吹曲辞上之回》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "将军出紫塞，冒顿在乌贪。",
+              "type": "诗歌",
+              "ref": "卢照邻《鼓吹曲辞战城南》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "城南征战多，城北无饥鵶。",
+              "type": "诗歌",
+              "ref": "刘驾《鼓吹曲辞战城南》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "万里桑干傍，茫茫古蕃壤。",
+              "type": "诗歌",
+              "ref": "僧贯休《鼓吹曲辞战城南二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "碛中有阴兵，战马时惊蹶。",
+              "type": "诗歌",
+              "ref": "僧贯休《鼓吹曲辞战城南二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "巫山凌太清，岧峣类削成。",
+              "type": "诗歌",
+              "ref": "郑世翼《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "巫山峰十二，环合隐昭回。",
+              "type": "诗歌",
+              "ref": "沈佺期《鼓吹曲辞巫山高二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "神女向高唐，巫山下夕阳。",
+              "type": "诗歌",
+              "ref": "沈佺期《鼓吹曲辞巫山高二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "巫山望不极，望望下朝雰。",
+              "type": "诗歌",
+              "ref": "卢照邻《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "巫山高不极，沓沓状奇新。",
+              "type": "诗歌",
+              "ref": "张循之《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "楚国巫山秀，清猨日夜啼。",
+              "type": "诗歌",
+              "ref": "刘方平《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "night"
+              ]
+             },
+             {
+              "text": "巫峡见巴东，迢迢半出空。",
+              "type": "诗歌",
+              "ref": "皇甫冉《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "巫山十二峰，皆在碧虚中。",
+              "type": "诗歌",
+              "ref": "李端《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "何山无朝云，彼云亦悠扬。",
+              "type": "诗歌",
+              "ref": "于𣸣《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "巴山上峡重复重，阳台碧峭十二峰。",
+              "type": "诗歌",
+              "ref": "孟郊《鼓吹曲辞巫山高二首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "见尽数万里，不闻三声猨。",
+              "type": "诗歌",
+              "ref": "孟郊《鼓吹曲辞巫山高二首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "碧丛丛，高插天，大江翻澜神曳烟。",
+              "type": "诗歌",
+              "ref": "李贺《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "雨为暮兮云为朝，楚王顦顇魂欲销。",
+              "type": "诗歌",
+              "ref": "僧齐己《鼓吹曲辞巫山高》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "酒中有毒酖主父，言之主父伤主母。",
+              "type": "诗歌",
+              "ref": "李贺《鼓吹曲辞将进酒》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "瑠璃钟，琥珀浓，小槽酒滴真珠红。",
+              "type": "诗歌",
+              "ref": "李贺《鼓吹曲辞将进酒》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "何地早芳菲？宛在长门殿。",
+              "type": "诗歌",
+              "ref": "沈佺期《鼓吹曲辞芳树》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "芳树本多奇，年华复在斯。",
+              "type": "诗歌",
+              "ref": "卢照邻《鼓吹曲辞芳树》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "玉花珍簟上，金缕画屏开。",
+              "type": "诗歌",
+              "ref": "徐彦伯《鼓吹曲辞芳树》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "迢迢芳园树，列映清池曲。",
+              "type": "诗歌",
+              "ref": "韦应物《鼓吹曲辞芳树》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "芳树已寥落，孤英尤可嘉。",
+              "type": "诗歌",
+              "ref": "元稹《鼓吹曲辞芳树》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "细蘂慢逐风，暖香闲破鼻。",
+              "type": "诗歌",
+              "ref": "罗隐《鼓吹曲辞芳树》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "君子事行役，再空芳岁期。",
+              "type": "诗歌",
+              "ref": "沈佺期《鼓吹曲辞有所思》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "桔槔烽火昼不灭，客路迢迢信难越。",
+              "type": "诗歌",
+              "ref": "孟郊《鼓吹曲辞有所思》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "当时我醉美人家，美人颜色娇如花。",
+              "type": "诗歌",
+              "ref": "卢仝《鼓吹曲辞有所思》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring"
+              ]
+             },
+             {
+              "text": "借问江上柳，青青为谁春。",
+              "type": "诗歌",
+              "ref": "韦应物《鼓吹曲辞有所思》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "water"
+              ]
+             },
+             {
+              "text": "朝亦有所思，暮亦有所思。",
+              "type": "诗歌",
+              "ref": "刘氏云《鼓吹曲辞有所思》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "高台暂俯临，飞翼耸轻音。",
+              "type": "诗歌",
+              "ref": "褚亮《鼓吹曲辞临高台》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "临高台，高台迢递绝浮埃。",
+              "type": "诗歌",
+              "ref": "王勃《鼓吹曲辞临高台》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "凉风吹远念，使我升高台。",
+              "type": "诗歌",
+              "ref": "僧贯休《鼓吹曲辞临高台》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "穿屋穿墙不知止，争树争巢入营死。",
+              "type": "诗歌",
+              "ref": "庄南杰《鼓吹曲辞黄雀行》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "朝日敛红烟，垂竿向绿川。",
+              "type": "诗歌",
+              "ref": "沈佺期《鼓吹曲辞钓竿篇》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "汉将承恩西破戎，捷书先奏未央宫。",
+              "type": "诗歌",
+              "ref": "岑参《鼓吹曲辞凯歌六首一》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "官军西出过楼兰，营幕傍临月窟寒。",
+              "type": "诗歌",
+              "ref": "岑参《鼓吹曲辞凯歌六首二》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "winter",
+               "water"
+              ]
+             },
+             {
+              "text": "鸣笳擂鼓拥回军，破国平蕃昔未闻。",
+              "type": "诗歌",
+              "ref": "岑参《鼓吹曲辞凯歌六首三》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "月落辕门鼓角鸣，千群面缚出蕃城。",
+              "type": "诗歌",
+              "ref": "岑参《鼓吹曲辞凯歌六首四》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "蕃军遥见汉家营，满谷连山徧哭声。",
+              "type": "诗歌",
+              "ref": "岑参《鼓吹曲辞凯歌六首五》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "暮雨旌旗湿未干，胡尘白草日光寒。",
+              "type": "诗歌",
+              "ref": "岑参《鼓吹曲辞凯歌六首六》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "spring",
+               "winter"
+              ]
+             },
+             {
+              "text": "怒飞饥啸，翾不可当。",
+              "type": "诗歌",
+              "ref": "柳宗元《鼓吹曲辞鼓吹铙歌泾水黄》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "弥巴蔽荆，负南极以安。",
+              "type": "诗歌",
+              "ref": "柳宗元《鼓吹曲辞鼓吹铙歌苞枿》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "河右澶漫，顽为之魁。",
+              "type": "诗歌",
+              "ref": "柳宗元《鼓吹曲辞鼓吹铙歌河右平》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "岁来侵边，或傅于都。",
+              "type": "诗歌",
+              "ref": "柳宗元《鼓吹曲辞鼓吹铙歌铁山碎》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "本邦伊晋，惟时不靖。",
+              "type": "诗歌",
+              "ref": "柳宗元《鼓吹曲辞鼓吹铙歌靖本邦》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature"
+              ]
+             },
+             {
+              "text": "吐谷浑盛彊，背西海以夸。",
+              "type": "诗歌",
+              "ref": "柳宗元《鼓吹曲辞鼓吹铙歌吐谷浑》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "water"
+              ]
+             },
+             {
+              "text": "陇头已断人不行，胡骑夜入凉州城。",
+              "type": "诗歌",
+              "ref": "张籍《横吹曲辞陇头》",
+              "origin": "中",
+              "themes": [
+               "poetry",
+               "nature",
+               "night"
+              ]
+             }
+            ];
+
 
       const TERM_NAMES = [
         '小寒', '大寒', '立春', '雨水', '惊蛰', '春分', '清明', '谷雨',
@@ -743,7 +4405,7 @@
         '<polygon points="98,168 180,134 182,152 104,190" fill="#f1d68a" opacity=".5"/>' +
         '</svg>'
 
-      const ARTS = [
+      const BASE_SCENES = [
         { name: '红幕', themes: ['stage', 'drama', 'theater'], svg: CURTAIN },
         { name: '放映', themes: ['stage', 'drama', 'theater', 'film'], svg: PROJECTOR },
         { name: '手稿', themes: ['stage', 'drama', 'novel', 'book', 'study', 'poetry'], svg: SCRIPT_PAGE },
@@ -757,6 +4419,19 @@
         { name: '远路', themes: ['journey', 'nature', 'winter', 'foreign', 'novel'], svg: ROAD_SUN },
         { name: '雨灯', themes: ['rain', 'night', 'book', 'study', 'poetry'], svg: RAIN_LAMP }
       ]
+
+      const ARTS = []
+      for (let ai = 0; ai < 100; ai++) {
+        const base = BASE_SCENES[ai % BASE_SCENES.length]
+        const variant = Math.floor(ai / BASE_SCENES.length)
+        const rotate = (variant * 39) % 360
+        ARTS.push({
+          name: base.name + '·' + (variant + 1),
+          themes: base.themes.slice(),
+          svg: base.svg,
+          filter: 'sepia(.4) hue-rotate(' + rotate + 'deg) saturate(1.2) contrast(1.02)'
+        })
+      }
 
       /* ---------------- 状态 ---------------- */
       const canvas = document.getElementById('poster')
@@ -1060,7 +4735,14 @@
         line(x - 4, y + h + 4, x - 4, y - 4, 'rgba(40,38,31,.5)', 1)
 
         if (img) {
-          ctx.drawImage(img, x, y, w, h)
+          if (state.imgMode === 'auto' && currentArt().filter && ctx.filter !== undefined) {
+            ctx.save()
+            ctx.filter = currentArt().filter
+            ctx.drawImage(img, x, y, w, h)
+            ctx.restore()
+          } else {
+            ctx.drawImage(img, x, y, w, h)
+          }
         } else {
           ctx.fillStyle = '#d9cfb8'
           ctx.fillRect(x, y, w, h)
