@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>码字人日历 · 戏剧·诗歌·小说</title>
   <style>
-    @import url('https://cdn.jsdelivr.net/npm/cn-fontsource-smiley-sans-oblique-regular/font.css');
-    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/400.css');
-    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/500.css');
-    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/900.css');
-    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css');
-    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css');
-    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.2.6/400.css');
-    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.2.6/700.css');
+    @import url('fonts/smiley/font.css');
+    @import url('fonts/noto-serif/400.css');
+    @import url('fonts/noto-serif/500.css');
+    @import url('fonts/noto-serif/900.css');
+    @import url('fonts/lxgw/regular.css');
+    @import url('fonts/noto-sans/400.css');
+    @import url('fonts/noto-sans/700.css');
     :root {
       --bg: #e9e2d2;
       --panel: #f7f1e2;
@@ -744,7 +743,7 @@
       const SERIF = '"Noto Serif SC","Songti SC","STSong","SimSun",serif'
       const SANS = '"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif'
       const DISPLAY = '"Smiley Sans Oblique","Smiley Sans","得意黑",sans-serif'
-      const KAI = '"LXGW WenKai","Kaiti SC","STKaiti","KaiTi",serif'
+      const KAI = '"LXGW WenKai Screen","LXGW WenKai","Kaiti SC","STKaiti","KaiTi",serif'
 
       function font(px, style) {
         return (style || '400') + ' ' + px + 'px ' + SERIF
@@ -1162,7 +1161,7 @@
         Promise.all([
           document.fonts.load('400 20px "Smiley Sans Oblique"', '码字人日历戏剧诗歌小说'),
           document.fonts.load('900 20px "Noto Serif SC"', '月日月日历场次戏剧'),
-          document.fonts.load('400 20px "LXGW WenKai"', '写一句今天想说的话慢慢来'),
+          document.fonts.load('400 20px "LXGW WenKai Screen"', '写一句今天想说的话慢慢来'),
           document.fonts.load('400 20px "Noto Sans SC"', '场次出处摘自戏票存根')
         ]).then(boot, boot)
       } else {
