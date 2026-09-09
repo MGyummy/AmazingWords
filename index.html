@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>碼字人日曆 · 戲劇·詩歌·小說</title>
+  <title>码字人日历 · 戏剧·诗歌·小说</title>
   <style>
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/400.css');
+    @import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.6/700.css');
     :root {
       --bg: #e9e2d2;
       --panel: #f7f1e2;
@@ -43,7 +45,7 @@
     }
     h1 {
       margin: 0;
-      font-family: "Songti TC", "STSong", "Noto Serif CJK TC", "SimSun", serif;
+      font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
       font-size: 34px;
       font-weight: 500;
       letter-spacing: .08em;
@@ -200,53 +202,53 @@
 <body>
   <main>
     <header>
-      <p class="kicker">戲劇 · 詩歌 · 小說</p>
-      <h1>碼字人日曆</h1>
+      <p class="kicker">戏剧 · 诗歌 · 小说</p>
+      <h1>码字人日历</h1>
       <p class="sub" id="header-date">—</p>
     </header>
 
-    <section class="stage" aria-label="今日碼字人日曆卡片預覽">
-      <canvas id="poster" width="1500" height="2000" aria-label="戲劇詩歌小說風格碼字人日曆卡片"></canvas>
+    <section class="stage" aria-label="今日码字人日历卡片预览">
+      <canvas id="poster" width="1500" height="2000" aria-label="戏剧诗歌小说风格码字人日历卡片"></canvas>
     </section>
 
-    <section class="panel" aria-label="卡片編輯">
+    <section class="panel" aria-label="卡片编辑">
       <div class="row">
         <span class="row-label">日期</span>
-        <span class="auto-hint">自動生成 · <b id="date-hint">—</b></span>
+        <span class="auto-hint">自动生成 · <b id="date-hint">—</b></span>
       </div>
 
       <div class="row">
         <span class="row-label">文字</span>
-        <div class="seg" role="group" aria-label="文字來源">
-          <button type="button" id="text-auto" aria-pressed="true">自動</button>
-          <button type="button" id="text-manual" aria-pressed="false">手寫</button>
+        <div class="seg" role="group" aria-label="文字来源">
+          <button type="button" id="text-auto" aria-pressed="true">自动</button>
+          <button type="button" id="text-manual" aria-pressed="false">手写</button>
         </div>
       </div>
       <div class="manual-fields" id="manual-fields">
-        <textarea id="manual-text" maxlength="60" placeholder="寫一句今天想說的話"></textarea>
-        <input class="manual-source" id="manual-source" maxlength="60" placeholder="來源，例如：海明威《老人與海》" />
+        <textarea id="manual-text" maxlength="60" placeholder="写一句今天想说的话"></textarea>
+        <input class="manual-source" id="manual-source" maxlength="60" placeholder="来源，例如：海明威《老人与海》" />
       </div>
 
       <div class="row">
-        <span class="row-label">配圖</span>
-        <div class="seg" role="group" aria-label="配圖來源">
-          <button type="button" class="img-mode" data-img="none" aria-pressed="true">無圖</button>
-          <button type="button" class="img-mode" data-img="auto" aria-pressed="false">自動</button>
-          <label for="upload-file">上傳圖片</label>
+        <span class="row-label">配图</span>
+        <div class="seg" role="group" aria-label="配图来源">
+          <button type="button" class="img-mode" data-img="none" aria-pressed="true">无图</button>
+          <button type="button" class="img-mode" data-img="auto" aria-pressed="false">自动</button>
+          <label for="upload-file">上传图片</label>
           <input type="file" id="upload-file" accept="image/*" class="hidden" />
         </div>
       </div>
 
       <div class="actions">
-        <button type="button" id="shuffle" class="secondary">換一句</button>
-        <button type="button" id="swap-img" class="secondary hidden">換配圖</button>
-        <button type="button" id="download" class="primary">下載 PNG</button>
+        <button type="button" id="shuffle" class="secondary">换一句</button>
+        <button type="button" id="swap-img" class="secondary hidden">换配图</button>
+        <button type="button" id="download" class="primary">下载 PNG</button>
       </div>
     </section>
 
     <p class="note">
-      日期於每日 00:00 後自動更新；自動摘句來自詩歌、話劇與小說並附出處，逢節氣自動切換節氣文案。<br/>
-      想保存今天這張卡：點「下載 PNG」；在微信裡長按卡片也可直接儲存。
+      日期于每日 00:00 后自动更新；自动摘句来自诗歌、话剧与小说并附出处，逢节气自动切换节气文案。<br/>
+      想保存今天这张卡：点「下载 PNG」；在微信里长按卡片也可直接储存。
     </p>
   </main>
 
@@ -290,108 +292,108 @@
       /* ---------------- 素材 ---------------- */
       const QUOTES = [
         {
-          text: '蒹葭蒼蒼，白露為霜。所謂伊人，在水一方。',
-          type: '詩歌',
-          ref: '《詩經·秦風·蒹葭》',
+          text: '蒹葭苍苍，白露为霜。所谓伊人，在水一方。',
+          type: '诗歌',
+          ref: '《诗经·秦风·蒹葭》',
           origin: '中',
           themes: ['autumn', 'nature', 'water', 'poetry']
         },
         {
-          text: '渡頭餘落日，墟里上孤煙。',
-          type: '詩歌',
-          ref: '王維《輞川閒居贈裴秀才迪》',
+          text: '渡头余落日，墟里上孤烟。',
+          type: '诗歌',
+          ref: '王维《辋川闲居赠裴秀才迪》',
           origin: '中',
           themes: ['autumn', 'nature', 'water', 'poetry']
         },
         {
-          text: '桃花流水窅然去，別有天地非人間。',
-          type: '詩歌',
-          ref: '李白《山中問答》',
+          text: '桃花流水窅然去，别有天地非人间。',
+          type: '诗歌',
+          ref: '李白《山中问答》',
           origin: '中',
           themes: ['spring', 'nature', 'water', 'poetry']
         },
         {
-          text: '原來奼紫嫣紅開遍，似這般都付與斷井頹垣。',
-          type: '話劇',
-          ref: '湯顯祖《牡丹亭·驚夢》',
+          text: '原来姹紫嫣红开遍，似这般都付与断井颓垣。',
+          type: '话剧',
+          ref: '汤显祖《牡丹亭·惊梦》',
           origin: '中',
           themes: ['stage', 'drama', 'spring', 'poetry']
         },
         {
-          text: '眼看他起朱樓，眼看他宴賓客，眼看他樓塌了。',
-          type: '話劇',
-          ref: '孔尚任《桃花扇·餘韻》',
+          text: '眼看他起朱楼，眼看他宴宾客，眼看他楼塌了。',
+          type: '话剧',
+          ref: '孔尚任《桃花扇·余韵》',
           origin: '中',
           themes: ['stage', 'drama', 'autumn', 'novel']
         },
         {
-          text: '滿紙荒唐言，一把辛酸淚。都雲作者癡，誰解其中味。',
-          type: '小說',
-          ref: '曹雪芹《紅樓夢·第一回》',
+          text: '满纸荒唐言，一把辛酸泪。都云作者痴，谁解其中味。',
+          type: '小说',
+          ref: '曹雪芹《红楼梦·第一回》',
           origin: '中',
           themes: ['novel', 'book', 'study', 'autumn']
         },
         {
-          text: '會心處，不必在遠。翳然林水，便自有濠濮閒想也。',
-          type: '小說',
-          ref: '《世說新語·言語》',
+          text: '会心处，不必在远。翳然林水，便自有濠濮闲想也。',
+          type: '小说',
+          ref: '《世说新语·言语》',
           origin: '中',
           themes: ['novel', 'nature', 'water', 'autumn']
         },
         {
-          text: '採菊東籬下，悠然見南山。',
-          type: '詩歌',
-          ref: '陶淵明《飲酒·其五》',
+          text: '采菊东篱下，悠然见南山。',
+          type: '诗歌',
+          ref: '陶渊明《饮酒·其五》',
           origin: '中',
           themes: ['autumn', 'nature', 'poetry']
         },
         {
-          text: '回首向來蕭瑟處，歸去，也無風雨也無晴。',
-          type: '詩歌',
-          ref: '蘇軾《定風波》',
+          text: '回首向来萧瑟处，归去，也无风雨也无晴。',
+          type: '诗歌',
+          ref: '苏轼《定风波》',
           origin: '中',
           themes: ['rain', 'nature', 'poetry']
         },
         {
-          text: '全世界是一個舞臺，所有的男男女女不過是演員。',
-          type: '話劇',
-          ref: '莎士比亞《皆大歡喜》第二幕第七場',
+          text: '全世界是一个舞台，所有的男男女女不过是演员。',
+          type: '话剧',
+          ref: '莎士比亚《皆大欢喜》第二幕第七场',
           origin: '外',
           themes: ['stage', 'drama', 'foreign']
         },
         {
-          text: '我們都在陰溝裡，可是總有人還在仰望星空。',
-          type: '話劇',
-          ref: '王爾德《溫夫人的扇子》',
+          text: '我们都在阴沟里，可是总有人还在仰望星空。',
+          type: '话剧',
+          ref: '王尔德《温夫人的扇子》',
           origin: '外',
           themes: ['stage', 'drama', 'foreign', 'novel']
         },
         {
-          text: '使生如夏花之絢爛，死如秋葉之靜美。',
-          type: '詩歌',
-          ref: '泰戈爾《飛鳥集》',
+          text: '使生如夏花之绚烂，死如秋叶之静美。',
+          type: '诗歌',
+          ref: '泰戈尔《飞鸟集》',
           origin: '外',
           themes: ['summer', 'autumn', 'nature', 'foreign', 'poetry']
         },
         {
           text: '幸福的家庭都是相似的，不幸的家庭各有各的不幸。',
-          type: '小說',
-          ref: '托爾斯泰《安娜·卡列尼娜》',
+          type: '小说',
+          ref: '托尔斯泰《安娜·卡列尼娜》',
           origin: '外',
           themes: ['novel', 'book', 'foreign']
         },
         {
-          text: '凡事都有定期，天下萬物都有定時。',
-          type: '外國典籍',
-          ref: '《聖經·傳道書》3:1',
+          text: '凡事都有定期，天下万物都有定时。',
+          type: '外国典籍',
+          ref: '《圣经·传道书》3:1',
           origin: '外',
           themes: ['time', 'season', 'foreign', 'nature']
         }
       ]
 
       const TERM_NAMES = [
-        '小寒', '大寒', '立春', '雨水', '驚蟄', '春分', '清明', '穀雨',
-        '立夏', '小滿', '芒種', '夏至', '小暑', '大暑', '立秋', '處暑',
+        '小寒', '大寒', '立春', '雨水', '惊蛰', '春分', '清明', '谷雨',
+        '立夏', '小满', '芒种', '夏至', '小暑', '大暑', '立秋', '处暑',
         '白露', '秋分', '寒露', '霜降', '立冬', '小雪', '大雪', '冬至'
       ]
       const TERM_SECONDS = [
@@ -420,9 +422,9 @@
       }
 
       function termSeason(name) {
-        const spring = ['立春', '雨水', '驚蟄', '春分', '清明', '穀雨']
-        const summer = ['立夏', '小滿', '芒種', '夏至', '小暑', '大暑']
-        const autumn = ['立秋', '處暑', '白露', '秋分', '寒露', '霜降']
+        const spring = ['立春', '雨水', '惊蛰', '春分', '清明', '谷雨']
+        const summer = ['立夏', '小满', '芒种', '夏至', '小暑', '大暑']
+        const autumn = ['立秋', '处暑', '白露', '秋分', '寒露', '霜降']
         const winter = ['立冬', '小雪', '大雪', '冬至', '小寒', '大寒']
         if (spring.indexOf(name) >= 0) return 'spring'
         if (summer.indexOf(name) >= 0) return 'summer'
@@ -432,30 +434,30 @@
       }
 
       const TERM_QUOTES = {
-        '小寒': { text: '牆角數枝梅，凌寒獨自開。', type: '詩歌', ref: '王安石《梅花》' },
-        '大寒': { text: '歲暮陰陽催短景，天涯霜雪霽寒宵。', type: '詩歌', ref: '杜甫《閣夜》' },
-        '立春': { text: '春已歸來，看美人頭上，裊裊春幡。', type: '詩歌', ref: '辛棄疾《漢宮春·立春日》' },
-        '雨水': { text: '好雨知時節，當春乃發生。', type: '詩歌', ref: '杜甫《春夜喜雨》' },
-        '驚蟄': { text: '微雨眾卉新，一雷驚蟄始。', type: '詩歌', ref: '韋應物《觀田家》' },
-        '春分': { text: '仲春初四日，春色正中分。', type: '詩歌', ref: '徐鉉《春分日》' },
-        '清明': { text: '清明時節雨紛紛，路上行人欲斷魂。', type: '詩歌', ref: '杜牧《清明》' },
-        '穀雨': { text: '穀雨春光曉，山川黛色青。', type: '詩歌', ref: '元稹《詠廿四氣詩·穀雨三月中》' },
-        '立夏': { text: '槐柳陰初密，簾櫳暑尚微。', type: '詩歌', ref: '陸游《立夏》' },
-        '小滿': { text: '夜鶯啼綠柳，皓月醒長空。', type: '詩歌', ref: '歐陽修《小滿》' },
-        '芒種': { text: '時雨及芒種，四野皆插秧。', type: '詩歌', ref: '陸游《時雨》' },
-        '夏至': { text: '晝晷已雲極，宵漏自此長。', type: '詩歌', ref: '韋應物《夏至避暑北池》' },
-        '小暑': { text: '夜熱依然午熱同，開門小立月明中。', type: '詩歌', ref: '楊萬里《夏夜追涼》' },
-        '大暑': { text: '赤日幾時過，清風無處尋。', type: '詩歌', ref: '曾幾《大暑》' },
-        '立秋': { text: '自古逢秋悲寂寥，我言秋日勝春朝。', type: '詩歌', ref: '劉禹錫《秋詞》' },
-        '處暑': { text: '離離暑雲散，嫋嫋涼風起。', type: '詩歌', ref: '白居易《早秋曲江感懷》' },
-        '白露': { text: '蒹葭蒼蒼，白露為霜。所謂伊人，在水一方。', type: '詩歌', ref: '《詩經·秦風·蒹葭》' },
-        '秋分': { text: '漏鍾仍夜淺，時節欲秋分。', type: '詩歌', ref: '賈島《夜喜賀蘭三見訪》' },
-        '寒露': { text: '嫋嫋涼風動，淒淒寒露零。', type: '詩歌', ref: '白居易《池上》' },
-        '霜降': { text: '停車坐愛楓林晚，霜葉紅於二月花。', type: '詩歌', ref: '杜牧《山行》' },
-        '立冬': { text: '凍筆新詩懶寫，寒爐美酒時溫。', type: '詩歌', ref: '李白《立冬》' },
-        '小雪': { text: '花雪隨風不厭看，更多還肯失林巒。', type: '詩歌', ref: '戴叔倫《小雪》' },
-        '大雪': { text: '孤舟蓑笠翁，獨釣寒江雪。', type: '詩歌', ref: '柳宗元《江雪》' },
-        '冬至': { text: '天時人事日相催，冬至陽生春又來。', type: '詩歌', ref: '杜甫《小至》' }
+        '小寒': { text: '墙角数枝梅，凌寒独自开。', type: '诗歌', ref: '王安石《梅花》' },
+        '大寒': { text: '岁暮阴阳催短景，天涯霜雪霁寒宵。', type: '诗歌', ref: '杜甫《阁夜》' },
+        '立春': { text: '春已归来，看美人头上，袅袅春幡。', type: '诗歌', ref: '辛弃疾《汉宫春·立春日》' },
+        '雨水': { text: '好雨知时节，当春乃发生。', type: '诗歌', ref: '杜甫《春夜喜雨》' },
+        '惊蛰': { text: '微雨众卉新，一雷惊蛰始。', type: '诗歌', ref: '韦应物《观田家》' },
+        '春分': { text: '仲春初四日，春色正中分。', type: '诗歌', ref: '徐铉《春分日》' },
+        '清明': { text: '清明时节雨纷纷，路上行人欲断魂。', type: '诗歌', ref: '杜牧《清明》' },
+        '谷雨': { text: '谷雨春光晓，山川黛色青。', type: '诗歌', ref: '元稹《咏廿四气诗·谷雨三月中》' },
+        '立夏': { text: '槐柳阴初密，帘栊暑尚微。', type: '诗歌', ref: '陆游《立夏》' },
+        '小满': { text: '夜莺啼绿柳，皓月醒长空。', type: '诗歌', ref: '欧阳修《小满》' },
+        '芒种': { text: '时雨及芒种，四野皆插秧。', type: '诗歌', ref: '陆游《时雨》' },
+        '夏至': { text: '昼晷已云极，宵漏自此长。', type: '诗歌', ref: '韦应物《夏至避暑北池》' },
+        '小暑': { text: '夜热依然午热同，开门小立月明中。', type: '诗歌', ref: '杨万里《夏夜追凉》' },
+        '大暑': { text: '赤日几时过，清风无处寻。', type: '诗歌', ref: '曾几《大暑》' },
+        '立秋': { text: '自古逢秋悲寂寥，我言秋日胜春朝。', type: '诗歌', ref: '刘禹锡《秋词》' },
+        '处暑': { text: '离离暑云散，袅袅凉风起。', type: '诗歌', ref: '白居易《早秋曲江感怀》' },
+        '白露': { text: '蒹葭苍苍，白露为霜。所谓伊人，在水一方。', type: '诗歌', ref: '《诗经·秦风·蒹葭》' },
+        '秋分': { text: '漏钟仍夜浅，时节欲秋分。', type: '诗歌', ref: '贾岛《夜喜贺兰三见访》' },
+        '寒露': { text: '袅袅凉风动，凄凄寒露零。', type: '诗歌', ref: '白居易《池上》' },
+        '霜降': { text: '停车坐爱枫林晚，霜叶红于二月花。', type: '诗歌', ref: '杜牧《山行》' },
+        '立冬': { text: '冻笔新诗懒写，寒炉美酒时温。', type: '诗歌', ref: '李白《立冬》' },
+        '小雪': { text: '花雪随风不厌看，更多还肯失林峦。', type: '诗歌', ref: '戴叔伦《小雪》' },
+        '大雪': { text: '孤舟蓑笠翁，独钓寒江雪。', type: '诗歌', ref: '柳宗元《江雪》' },
+        '冬至': { text: '天时人事日相催，冬至阳生春又来。', type: '诗歌', ref: '杜甫《小至》' }
       }
 
       const CURTAIN =
@@ -596,11 +598,11 @@
         '</svg>'
 
       const ARTS = [
-        { name: '紅幕', themes: ['stage', 'drama', 'theater'], svg: CURTAIN },
+        { name: '红幕', themes: ['stage', 'drama', 'theater'], svg: CURTAIN },
         { name: '放映', themes: ['stage', 'drama', 'theater', 'film'], svg: PROJECTOR },
         { name: '手稿', themes: ['stage', 'drama', 'novel', 'book', 'study', 'poetry'], svg: SCRIPT_PAGE },
         { name: '墨月', themes: ['poetry', 'nature', 'water', 'autumn', 'winter', 'classic'], svg: INK_MOON },
-        { name: '燈下', themes: ['novel', 'book', 'study', 'foreign', 'winter'], svg: DESK_LAMP },
+        { name: '灯下', themes: ['novel', 'book', 'study', 'foreign', 'winter'], svg: DESK_LAMP },
         { name: '春窗', themes: ['spring', 'rain', 'water', 'nature', 'poetry'], svg: SPRING_WINDOW },
         { name: '夏野', themes: ['summer', 'nature', 'foreign', 'poetry'], svg: SUMMER_FIELD },
         { name: '秋月', themes: ['autumn', 'water', 'nature', 'poetry', 'novel'], svg: AUTUMN_MOON },
@@ -674,7 +676,7 @@
 
       function getQuoteText() {
         if (state.textMode === 'manual') {
-          return state.manual.trim() || '寫一句今天想說的話，會印在卡片上'
+          return state.manual.trim() || '写一句今天想说的话，会印在卡片上'
         }
         return getAutoEntry().text
       }
@@ -733,7 +735,7 @@
       }
 
       /* ---------------- Canvas 工具 ---------------- */
-      const SERIF = '"Songti TC","STSong","Noto Serif CJK TC","Songti SC","SimSun",serif'
+      const SERIF = '"Noto Serif SC","Songti SC","STSong","SimSun",serif'
       const SANS = '"PingFang TC","PingFang SC","Microsoft JhengHei","Microsoft YaHei",sans-serif'
 
       function font(px, style) {
@@ -786,7 +788,7 @@
           const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }))
           const img = new Image()
           img.onload = function () { URL.revokeObjectURL(url); resolve(img) }
-          img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('SVG 載入失敗')) }
+          img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('SVG 载入失败')) }
           img.src = url
         })
       }
@@ -801,7 +803,7 @@
         ctx.closePath()
       }
 
-      /* ---------------- 背景與固定排版 ---------------- */
+      /* ---------------- 背景与固定排版 ---------------- */
       function drawPaper() {
         ctx.fillStyle = '#f4ecdd'
         ctx.fillRect(0, 0, LW, LH)
@@ -818,17 +820,17 @@
         line(x1, 48, x2, 48, '#28261f', 2.5)
         line(x1, 92, x2, 92, '#28261f', 1)
 
-        fillText('戲劇·詩歌·小說', x1, 78, {
+        fillText('戏剧·诗歌·小说', x1, 78, {
           font: font(22, '500'),
           color: '#28261f'
         })
-        fillText('碼字人日曆', x2, 78, {
+        fillText('码字人日历', x2, 78, {
           font: font(21, '500'),
           color: '#b4432f',
           align: 'right'
         })
 
-        // 紅色齒孔裝飾
+        // 红色齿孔装饰
         ctx.fillStyle = 'rgba(180,67,47,.72)'
         for (let x = 58; x <= x2 - 8; x += 16) {
           ctx.beginPath()
@@ -855,7 +857,7 @@
           color: '#6d675b'
         })
 
-        const issue = '第 ' + d.yearDay + ' 場'
+        const issue = '第 ' + d.yearDay + ' 场'
         ctx.font = sansFont(15)
         const iw = Math.ceil(ctx.measureText(issue).width)
         const ix = LW - 50 - iw - 28
@@ -888,7 +890,7 @@
         const y = 238
         const x = (LW - w) / 2
 
-        // 紙框：完整顯示圖片，不做拉伸或裁切
+        // 纸框：完整显示图片，不做拉伸或裁切
         line(x - 9, y - 9, x + w + 9, y - 9, '#28261f', 1.2)
         line(x + w + 9, y - 9, x + w + 9, y + h + 9, '#28261f', 1.2)
         line(x + w + 9, y + h + 9, x - 9, y + h + 9, '#28261f', 1.2)
@@ -952,11 +954,11 @@
 
       function drawFooter(d) {
         line(50, 912, LW - 50, 912, 'rgba(40,38,31,.5)', 1, [2, 7])
-        fillText('碼字人日曆 · 戲票存根', 50, 950, {
+        fillText('码字人日历 · 戏票存根', 50, 950, {
           font: sansFont(13),
           color: '#6d675b'
         })
-        fillText('場次 ' + d.yearDay + ' / ' + d.totalDays, LW - 50, 950, {
+        fillText('场次 ' + d.yearDay + ' / ' + d.totalDays, LW - 50, 950, {
           font: sansFont(13),
           color: '#6d675b',
           align: 'right'
@@ -999,15 +1001,15 @@
         return new Promise(function (resolve, reject) {
           const img = new Image()
           img.onload = function () { resolve(img) }
-          img.onerror = function () { reject(new Error('圖片載入失敗')) }
+          img.onerror = function () { reject(new Error('图片载入失败')) }
           img.src = url
         })
       }
 
-      /* ---------------- 下載 ---------------- */
+      /* ---------------- 下载 ---------------- */
       function downloadPng() {
         const d = state.date
-        const name = '碼字人日曆-' + d.key + '.png'
+        const name = '码字人日历-' + d.key + '.png'
         if (canvas.toBlob) {
           canvas.toBlob(function (blob) {
             if (!blob) return
@@ -1045,7 +1047,7 @@
         els.swapImg.classList.toggle('hidden', state.imgMode !== 'auto')
 
         els.headerDate.textContent =
-          state.date.dateText + ' · ' + state.date.weekday + ' · 第 ' + state.date.yearDay + ' 場'
+          state.date.dateText + ' · ' + state.date.weekday + ' · 第 ' + state.date.yearDay + ' 场'
         els.dateHint.textContent = state.date.monthDay + ' ' + state.date.weekday
       }
 
@@ -1134,10 +1136,21 @@
 
       els.download.addEventListener('click', downloadPng)
 
-      /* ---------------- 啟動 ---------------- */
-      loadManualFromStorage()
-      syncControls()
-      render()
+      /* ---------------- 启动 ---------------- */
+      function boot() {
+        loadManualFromStorage()
+        syncControls()
+        render()
+      }
+      if (document.fonts && document.fonts.load) {
+        Promise.all([
+          document.fonts.load('400 20px "Noto Serif SC"'),
+          document.fonts.load('700 20px "Noto Serif SC"'),
+          document.fonts.load('400 20px "Noto Serif SC"', '码字人日历戏剧诗歌小说看水写')
+        ]).then(boot, boot)
+      } else {
+        boot()
+      }
     })()
   </script>
 </body>
