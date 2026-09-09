@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>码字人日历 · 戏剧·诗歌·小说</title>
+  <style>
+    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css');
+    @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css');
+    :root {
+      --bg: #e9e2d2;
+      --panel: #f7f1e2;
+      --ink: #28261f;
+      --muted: #6d675b;
+      --accent: #b4432f;
+      --line: rgba(40, 38, 31, .16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(180, 67, 47, .10), transparent 34%),
+        radial-gradient(circle at 90% 100%, rgba(180, 67, 47, .07), transparent 38%),
+        var(--bg);
+      color: var(--ink);
+      font-family: "PingFang TC", "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+      display: flex;
+      justify-content: center;
+    }
+    main {
+      width: min(100%, 620px);
+      padding: 30px 18px 42px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .kicker {
+      margin: 0 0 6px;
+      font-size: 12px;
+      letter-spacing: .4em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    h1 {
+      margin: 0;
+      font-family: "LXGW WenKai", "Kaiti SC", "STKaiti", "KaiTi", serif;
+      font-size: 34px;
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+    .sub {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .stage {
+      display: flex;
+      justify-content: center;
+    }
+    canvas {
+      width: min(100%, 440px);
+      height: auto;
+      display: block;
+      border-radius: 0;
+      box-shadow:
+        0 34px 64px rgba(55, 49, 42, .26),
+        0 10px 22px rgba(55, 49, 42, .16),
+        0 2px 6px rgba(55, 49, 42, .08);
+      background: transparent;
+    }
+    .panel {
+      margin: 18px auto 0;
+      max-width: 440px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .row-label {
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .auto-hint {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+    }
+    .auto-hint b { color: var(--accent); font-weight: 400; }
+    .seg {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+    .seg button, .seg label {
+      appearance: none;
+      -webkit-appearance: none;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s, color .15s;
+    }
+    .seg button[aria-pressed="true"] {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #f7f1e2;
+    }
+    .seg label { cursor: pointer; }
+    .seg label:active { background: var(--line); }
+    .manual-fields {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .manual-fields.show {
+      display: flex;
+    }
+    textarea, .manual-source {
+      width: 100%;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fffaf0;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.7;
+      padding: 10px 12px;
+    }
+    textarea { min-height: 64px; }
+    .manual-source { min-height: 0; }
+    textarea:focus, .manual-source:focus, button:focus-visible, label:focus-visible {
+      outline: 2px solid rgba(180, 67, 47, .5);
+      outline-offset: 1px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 2px;
+    }
+    .actions button {
+      flex: 1;
+      min-width: 120px;
+      appearance: none;
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 10px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line) !important;
+    }
+    .primary {
+      background: var(--ink);
+      color: #f7f1e2;
+      font-weight: 500;
+    }
+    .hidden { display: none !important; }
+    .note {
+      margin: 16px auto 0;
+      max-width: 440px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    .badge {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 999px;
+      background: rgba(180, 67, 47, .10);
+      color: var(--accent);
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="kicker">戏剧 · 诗歌 · 小说</p>
+      <h1>码字人日历</h1>
+      <p class="sub" id="header-date">—</p>
+    </header>
+
+    <section class="stage" aria-label="今日码字人日历卡片预览">
+      <canvas id="poster" width="1500" height="2000" aria-label="戏剧诗歌小说风格码字人日历卡片"></canvas>
+    </section>
+
+    <section class="panel" aria-label="卡片编辑">
+      <div class="row">
+        <span class="row-label">日期</span>
+        <span class="auto-hint">自动生成 · <b id="date-hint">—</b></span>
+      </div>
+
+      <div class="row">
+        <span class="row-label">文字</span>
+        <div class="seg" role="group" aria-label="文字来源">
+          <button type="button" id="text-auto" aria-pressed="true">自动</button>
+          <button type="button" id="text-manual" aria-pressed="false">手写</button>
+        </div>
+      </div>
+      <div class="manual-fields" id="manual-fields">
+        <textarea id="manual-text" maxlength="60" placeholder="写一句今天想说的话"></textarea>
+        <input class="manual-source" id="manual-source" maxlength="60" placeholder="来源，例如：海明威《老人与海》" />
+      </div>
+
+      <div class="row">
+        <span class="row-label">配图</span>
+        <div class="seg" role="group" aria-label="配图来源">
+          <button type="button" class="img-mode" data-img="none" aria-pressed="true">无图</button>
+          <button type="button" class="img-mode" data-img="auto" aria-pressed="false">自动</button>
+          <label for="upload-file">上传图片</label>
+          <input type="file" id="upload-file" accept="image/*" class="hidden" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" id="shuffle" class="secondary">换一句</button>
+        <button type="button" id="swap-img" class="secondary hidden">换配图</button>
+        <button type="button" id="download" class="primary">下载 PNG</button>
+      </div>
+    </section>
+
+    <p class="note">
+      日期于每日 00:00 后自动更新；自动摘句来自诗歌、话剧与小说并附出处，逢节气自动切换节气文案。<br/>
+      想保存今天这张卡：点「下载 PNG」；在微信里长按卡片也可直接储存。
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      'use strict'
+
+      /* ---------------- 日期 ---------------- */
+      const WEEK_TEXT = '日一二三四五六'
+
+      function pad(n) { return n < 10 ? '0' + n : '' + n }
+
+      function dayOfYear(d) {
+        const start = new Date(d.getFullYear(), 0, 0)
+        return Math.floor((d - start) / 86400000)
+      }
+
+      function isLeap(y) {
+        return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0
+      }
+
+      function getToday() {
+        const now = new Date()
+        const y = now.getFullYear()
+        const m = now.getMonth() + 1
+        const day = now.getDate()
+        return {
+          key: y + pad(m) + pad(day),
+          year: y,
+          month: m,
+          day: day,
+          dayText: pad(day),
+          monthDay: m + '月' + day + '日',
+          dateText: y + '年' + m + '月' + day + '日',
+          weekday: '星期' + WEEK_TEXT[now.getDay()],
+          yearDay: dayOfYear(now),
+          totalDays: isLeap(y) ? 366 : 365
+        }
+      }
+
+      /* ---------------- 素材 ---------------- */
+      const QUOTES = [
+        {
+          text: '蒹葭苍苍，白露为霜。所谓伊人，在水一方。',
+          type: '诗歌',
+          ref: '《诗经·秦风·蒹葭》',
+          origin: '中',
+          themes: ['autumn', 'nature', 'water', 'poetry']
+        },
+        {
+          text: '渡头余落日，墟里上孤烟。',
+          type: '诗歌',
+          ref: '王维《辋川闲居赠裴秀才迪》',
+          origin: '中',
+          themes: ['autumn', 'nature', 'water', 'poetry']
+        },
+        {
+          text: '桃花流水窅然去，别有天地非人间。',
+          type: '诗歌',
+          ref: '李白《山中问答》',
+          origin: '中',
+          themes: ['spring', 'nature', 'water', 'poetry']
+        },
+        {
+          text: '原来姹紫嫣红开遍，似这般都付与断井颓垣。',
+          type: '话剧',
+          ref: '汤显祖《牡丹亭·惊梦》',
+          origin: '中',
+          themes: ['stage', 'drama', 'spring', 'poetry']
+        },
+        {
+          text: '眼看他起朱楼，眼看他宴宾客，眼看他楼塌了。',
+          type: '话剧',
+          ref: '孔尚任《桃花扇·余韵》',
+          origin: '中',
+          themes: ['stage', 'drama', 'autumn', 'novel']
+        },
+        {
+          text: '满纸荒唐言，一把辛酸泪。都云作者痴，谁解其中味。',
+          type: '小说',
+          ref: '曹雪芹《红楼梦·第一回》',
+          origin: '中',
+          themes: ['novel', 'book', 'study', 'autumn']
+        },
+        {
+          text: '会心处，不必在远。翳然林水，便自有濠濮闲想也。',
+          type: '小说',
+          ref: '《世说新语·言语》',
+          origin: '中',
+          themes: ['novel', 'nature', 'water', 'autumn']
+        },
+        {
+          text: '采菊东篱下，悠然见南山。',
+          type: '诗歌',
+          ref: '陶渊明《饮酒·其五》',
+          origin: '中',
+          themes: ['autumn', 'nature', 'poetry']
+        },
+        {
+          text: '回首向来萧瑟处，归去，也无风雨也无晴。',
+          type: '诗歌',
+          ref: '苏轼《定风波》',
+          origin: '中',
+          themes: ['rain', 'nature', 'poetry']
+        },
+        {
+          text: '全世界是一个舞台，所有的男男女女不过是演员。',
+          type: '话剧',
+          ref: '莎士比亚《皆大欢喜》第二幕第七场',
+          origin: '外',
+          themes: ['stage', 'drama', 'foreign']
+        },
+        {
+          text: '我们都在阴沟里，可是总有人还在仰望星空。',
+          type: '话剧',
+          ref: '王尔德《温夫人的扇子》',
+          origin: '外',
+          themes: ['stage', 'drama', 'foreign', 'novel']
+        },
+        {
+          text: '使生如夏花之绚烂，死如秋叶之静美。',
+          type: '诗歌',
+          ref: '泰戈尔《飞鸟集》',
+          origin: '外',
+          themes: ['summer', 'autumn', 'nature', 'foreign', 'poetry']
+        },
+        {
+          text: '幸福的家庭都是相似的，不幸的家庭各有各的不幸。',
+          type: '小说',
+          ref: '托尔斯泰《安娜·卡列尼娜》',
+          origin: '外',
+          themes: ['novel', 'book', 'foreign']
+        },
+        {
+          text: '凡事都有定期，天下万物都有定时。',
+          type: '外国典籍',
+          ref: '《圣经·传道书》3:1',
+          origin: '外',
+          themes: ['time', 'season', 'foreign', 'nature']
+        }
+      ]
+
+      const TERM_NAMES = [
+        '小寒', '大寒', '立春', '雨水', '惊蛰', '春分', '清明', '谷雨',
+        '立夏', '小满', '芒种', '夏至', '小暑', '大暑', '立秋', '处暑',
+        '白露', '秋分', '寒露', '霜降', '立冬', '小雪', '大雪', '冬至'
+      ]
+      const TERM_SECONDS = [
+        0, 21208, 42467, 63836, 85337, 107014, 128867, 150921,
+        173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033,
+        353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758
+      ]
+
+      function solarTermDay(year, index) {
+        const offset = new Date(
+          (31556925974.7 * (year - 1900) + TERM_SECONDS[index] * 60000) +
+          Date.UTC(1900, 0, 6, 2, 5)
+        )
+        return offset.getUTCDate()
+      }
+
+      function currentSolarTerm(dateInfo) {
+        for (let n = 0; n < TERM_NAMES.length; n++) {
+          const month = Math.floor(n / 2) + 1
+          const day = solarTermDay(dateInfo.year, n)
+          if (dateInfo.month === month && dateInfo.day === day) {
+            return { name: TERM_NAMES[n], index: n, month: month, day: day }
+          }
+        }
+        return null
+      }
+
+      function termSeason(name) {
+        const spring = ['立春', '雨水', '惊蛰', '春分', '清明', '谷雨']
+        const summer = ['立夏', '小满', '芒种', '夏至', '小暑', '大暑']
+        const autumn = ['立秋', '处暑', '白露', '秋分', '寒露', '霜降']
+        const winter = ['立冬', '小雪', '大雪', '冬至', '小寒', '大寒']
+        if (spring.indexOf(name) >= 0) return 'spring'
+        if (summer.indexOf(name) >= 0) return 'summer'
+        if (autumn.indexOf(name) >= 0) return 'autumn'
+        if (winter.indexOf(name) >= 0) return 'winter'
+        return ''
+      }
+
+      const TERM_QUOTES = {
+        '小寒': { text: '墙角数枝梅，凌寒独自开。', type: '诗歌', ref: '王安石《梅花》' },
+        '大寒': { text: '岁暮阴阳催短景，天涯霜雪霁寒宵。', type: '诗歌', ref: '杜甫《阁夜》' },
+        '立春': { text: '春已归来，看美人头上，袅袅春幡。', type: '诗歌', ref: '辛弃疾《汉宫春·立春日》' },
+        '雨水': { text: '好雨知时节，当春乃发生。', type: '诗歌', ref: '杜甫《春夜喜雨》' },
+        '惊蛰': { text: '微雨众卉新，一雷惊蛰始。', type: '诗歌', ref: '韦应物《观田家》' },
+        '春分': { text: '仲春初四日，春色正中分。', type: '诗歌', ref: '徐铉《春分日》' },
+        '清明': { text: '清明时节雨纷纷，路上行人欲断魂。', type: '诗歌', ref: '杜牧《清明》' },
+        '谷雨': { text: '谷雨春光晓，山川黛色青。', type: '诗歌', ref: '元稹《咏廿四气诗·谷雨三月中》' },
+        '立夏': { text: '槐柳阴初密，帘栊暑尚微。', type: '诗歌', ref: '陆游《立夏》' },
+        '小满': { text: '夜莺啼绿柳，皓月醒长空。', type: '诗歌', ref: '欧阳修《小满》' },
+        '芒种': { text: '时雨及芒种，四野皆插秧。', type: '诗歌', ref: '陆游《时雨》' },
+        '夏至': { text: '昼晷已云极，宵漏自此长。', type: '诗歌', ref: '韦应物《夏至避暑北池》' },
+        '小暑': { text: '夜热依然午热同，开门小立月明中。', type: '诗歌', ref: '杨万里《夏夜追凉》' },
+        '大暑': { text: '赤日几时过，清风无处寻。', type: '诗歌', ref: '曾几《大暑》' },
+        '立秋': { text: '自古逢秋悲寂寥，我言秋日胜春朝。', type: '诗歌', ref: '刘禹锡《秋词》' },
+        '处暑': { text: '离离暑云散，袅袅凉风起。', type: '诗歌', ref: '白居易《早秋曲江感怀》' },
+        '白露': { text: '蒹葭苍苍，白露为霜。所谓伊人，在水一方。', type: '诗歌', ref: '《诗经·秦风·蒹葭》' },
+        '秋分': { text: '漏钟仍夜浅，时节欲秋分。', type: '诗歌', ref: '贾岛《夜喜贺兰三见访》' },
+        '寒露': { text: '袅袅凉风动，凄凄寒露零。', type: '诗歌', ref: '白居易《池上》' },
+        '霜降': { text: '停车坐爱枫林晚，霜叶红于二月花。', type: '诗歌', ref: '杜牧《山行》' },
+        '立冬': { text: '冻笔新诗懒写，寒炉美酒时温。', type: '诗歌', ref: '李白《立冬》' },
+        '小雪': { text: '花雪随风不厌看，更多还肯失林峦。', type: '诗歌', ref: '戴叔伦《小雪》' },
+        '大雪': { text: '孤舟蓑笠翁，独钓寒江雪。', type: '诗歌', ref: '柳宗元《江雪》' },
+        '冬至': { text: '天时人事日相催，冬至阳生春又来。', type: '诗歌', ref: '杜甫《小至》' }
+      }
+
+      const CURTAIN =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#241a1a"/>' +
+        '<defs><path id="d" d="M0 0h84c-32 50-30 104 2 150 30 42 10 92-18 126 6 16-4 24-18 24H0z"/>' +
+        '<path id="di" d="M0 0h44c18 58 6 100 2 146-4 46 10 96 44 130H0z"/></defs>' +
+        '<ellipse cx="200" cy="225" rx="120" ry="42" fill="#f3d9a4" opacity=".9"/>' +
+        '<circle cx="200" cy="122" r="46" fill="#f6e7c4" opacity=".78"/>' +
+        '<path d="M0 0h400v32c-96 26-126 18-200 18-78 0-108 8-200-18z" fill="#8e2437"/>' +
+        '<path d="M0 0h400v26c-92 20-126 14-200 14-78 0-112 6-200-14z" fill="#a93245" opacity=".9"/>' +
+        '<use href="#d" fill="#7c2030"/><use href="#di" fill="#9a3041"/>' +
+        '<use href="#d" fill="#7c2030" transform="translate(400 0) scale(-1 1)"/>' +
+        '<use href="#di" fill="#9a3041" transform="translate(400 0) scale(-1 1)"/>' +
+        '<path d="M0 294h400" stroke="#e4b36a" stroke-width="2"/>' +
+        '<g fill="#e4b36a" opacity=".85"><rect x="20" y="286" width="16" height="3"/>' +
+        '<rect x="52" y="291" width="16" height="3"/><rect x="332" y="286" width="16" height="3"/>' +
+        '<rect x="364" y="291" width="16" height="3"/></g></svg>'
+
+      const PROJECTOR =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#17212a"/>' +
+        '<rect x="232" y="56" width="150" height="166" rx="3" fill="#efe6d0"/>' +
+        '<rect x="232" y="56" width="150" height="166" rx="3" fill="none" stroke="#101820" stroke-width="5"/>' +
+        '<path d="M100 0v18" stroke="#f4d9a2" stroke-width="3"/>' +
+        '<path d="M244 216c18-76 38-118 60-154M284 216c14-64 28-102 46-140" stroke="#f7e3b4" stroke-width="6" opacity=".45"/>' +
+        '<path d="M308 216c10-46 20-78 36-112" stroke="#f7e3b4" stroke-width="5" opacity=".3"/>' +
+        '<rect x="34" y="168" width="128" height="66" rx="8" fill="#2a2f33"/>' +
+        '<rect x="34" y="168" width="128" height="66" rx="8" fill="none" stroke="#0e141a" stroke-width="4"/>' +
+        '<circle cx="162" cy="196" r="20" fill="#f2cf86" stroke="#0e141a" stroke-width="4"/>' +
+        '<circle cx="162" cy="196" r="7" fill="#0e141a"/>' +
+        '<rect x="40" y="218" width="18" height="36" fill="#22272b"/><rect x="112" y="218" width="18" height="36" fill="#22272b"/>' +
+        '<rect x="0" y="268" width="400" height="32" fill="#111920"/>' +
+        '<path d="M0 268c70-26 210-26 400 0v32H0z" fill="#20303c"/>' +
+        '</svg>'
+
+      const INK_MOON =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#efe6d2"/>' +
+        '<circle cx="280" cy="108" r="44" fill="#f6e0a4" opacity=".92"/>' +
+        '<circle cx="280" cy="108" r="44" fill="none" stroke="#c8b98e" stroke-width="1.5"/>' +
+        '<path d="M0 300 C64 238 152 258 222 208 C286 164 338 210 400 176 L400 300 Z" fill="#45544a" opacity=".48"/>' +
+        '<path d="M0 300 C92 258 176 288 258 242 C320 206 374 232 400 218 L400 300 Z" fill="#243129" opacity=".9"/>' +
+        '<path d="M96 300 C104 240 114 204 126 154 M116 300 C128 234 138 204 150 172 M132 224 C152 214 170 208 190 200 M124 182 C142 174 164 170 186 168 M128 250 C148 244 168 240 190 240" ' +
+        'stroke="#202d26" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+        '<rect x="312" y="252" width="22" height="22" fill="#b4432f"/>' +
+        '<rect x="316" y="256" width="14" height="14" fill="#efe6d2"/>' +
+        '</svg>'
+
+      const DESK_LAMP =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#e7dec9"/>' +
+        '<rect x="228" y="46" width="148" height="118" fill="#2c3c4a"/>' +
+        '<rect x="228" y="46" width="148" height="118" fill="none" stroke="#1c2832" stroke-width="7"/>' +
+        '<line x1="302" y1="46" x2="302" y2="164" stroke="#1c2832" stroke-width="4"/>' +
+        '<line x1="228" y1="105" x2="376" y2="105" stroke="#1c2832" stroke-width="4"/>' +
+        '<circle cx="345" cy="90" r="16" fill="#f6e2a8"/>' +
+        '<path d="M0 300 L0 246 C116 220 210 232 400 190 L400 300 Z" fill="#675243"/>' +
+        '<path d="M98 92 L204 52 L216 112 L118 126 Z" fill="#3d5a4c"/>' +
+        '<path d="M102 90 L206 50 L228 66 L122 116 Z" fill="#496c5b"/>' +
+        '<line x1="146" y1="104" x2="142" y2="246" stroke="#3a2c22" stroke-width="6"/>' +
+        '<ellipse cx="180" cy="246" rx="62" ry="8" fill="#3a2c22"/>' +
+        '<polygon points="102,88 204,48 202,66 108,112" fill="#f4dd9a" opacity=".55"/>' +
+        '<rect x="248" y="176" width="20" height="70" fill="#a53e32"/><rect x="272" y="190" width="16" height="56" fill="#314a58"/>' +
+        '<rect x="292" y="200" width="13" height="46" fill="#7b6a3f"/><rect x="230" y="212" width="11" height="34" fill="#2e4a3a"/>' +
+        '</svg>'
+
+      const SCRIPT_PAGE =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#e4d9c1"/>' +
+        '<rect x="76" y="42" width="248" height="218" rx="3" fill="#fbf4e4"/>' +
+        '<rect x="76" y="42" width="248" height="218" rx="3" fill="none" stroke="#4a3f30" stroke-width="4"/>' +
+        '<path d="M108 84 C130 68 150 62 174 64 M108 114 C132 98 156 94 184 96 M108 146 C134 132 162 128 196 130 M108 178 C136 166 164 164 196 166 M108 210 C130 202 154 200 180 202" ' +
+        'stroke="#5b5142" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>' +
+        '<path d="M96 54 C110 48 124 46 136 48" stroke="#b4432f" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+        '<rect x="286" y="222" width="24" height="24" fill="#b4432f"/>' +
+        '<rect x="76" y="42" width="248" height="218" fill="none" stroke="#d7c8a8" stroke-width="2" stroke-dasharray="6 8" opacity=".9"/>' +
+        '</svg>'
+
+      const SPRING_WINDOW =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#f3ecd9"/>' +
+        '<rect x="72" y="44" width="256" height="212" fill="#a9cfb2"/>' +
+        '<rect x="72" y="44" width="256" height="212" fill="none" stroke="#4b4333" stroke-width="10"/>' +
+        '<line x1="200" y1="44" x2="200" y2="256" stroke="#4b4333" stroke-width="7"/>' +
+        '<line x1="72" y1="150" x2="328" y2="150" stroke="#4b4333" stroke-width="7"/>' +
+        '<path d="M96 238 C128 206 146 184 152 154 M168 232 C184 200 200 180 212 152" stroke="#31473a" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+        '<g fill="#6f9b6e">' +
+        '<path d="M146 168 C166 158 188 154 210 158 C194 176 170 186 146 186 Z"/>' +
+        '<path d="M226 178 C244 170 262 168 282 174 C268 190 248 198 224 198 Z"/>' +
+        '</g>' +
+        '<g stroke="#e7e7e7" stroke-width="3" opacity=".75">' +
+        '<path d="M98 96l14 0M132 96l14 0M98 200l14 0M256 200l14 0"/>' +
+        '</g>' +
+        '</svg>'
+
+      const SUMMER_FIELD =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#cfe0dd"/>' +
+        '<circle cx="300" cy="86" r="44" fill="#ffd98a"/>' +
+        '<path d="M0 196 C110 162 236 186 400 156 L400 300 L0 300 Z" fill="#a9c47f"/>' +
+        '<path d="M0 232 C130 202 250 224 400 198 L400 300 L0 300 Z" fill="#6f9b63"/>' +
+        '<g stroke="#f6ead0" stroke-width="2.5" opacity=".8">' +
+        '<path d="M70 238 C92 176 100 142 100 116 M106 236 C124 182 132 150 136 126 M148 242 C164 196 172 166 174 146"/>' +
+        '</g>' +
+        '<circle cx="84" cy="80" r="10" fill="#f6ead0" opacity=".9"/>' +
+        '<path d="M52 216l18-34 10 12 24-30" stroke="#4f7048" stroke-width="5" fill="none" stroke-linecap="round"/>' +
+        '</svg>'
+
+      const AUTUMN_MOON =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#ecdcc0"/>' +
+        '<circle cx="292" cy="92" r="50" fill="#f5e4ae"/>' +
+        '<path d="M0 300 C90 224 180 254 262 202 C320 170 368 196 400 166 L400 300 Z" fill="#5a4435" opacity=".6"/>' +
+        '<path d="M70 300 C86 236 96 202 106 166 M100 300 C112 244 120 214 128 182 M92 204 C116 192 140 186 166 184 M104 168 C126 160 150 156 178 156" ' +
+        'stroke="#4a3222" stroke-width="4.5" fill="none" stroke-linecap="round"/>' +
+        '<g fill="#b4432f">' +
+        '<path d="M150 178 C172 172 194 170 216 176 C202 192 180 200 158 200 Z"/>' +
+        '<path d="M118 160 C140 152 162 150 184 156 C170 172 148 180 126 180 Z"/>' +
+        '</g>' +
+        '<circle cx="90" cy="72" r="5" fill="#a14a34"/><circle cx="64" cy="120" r="4" fill="#a14a34"/>' +
+        '</svg>'
+
+      const WINTER_NIGHT =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+        '<rect width="400" height="300" fill="#1d2a36"/>' +
+        '<circle cx="92" cy="70" r="22" fill="#e6d9ad" opacity=".9"/>' +
+        '<path d="M0 226 C108 190 236 214 400 178 L400 300 L0 300 Z" fill="#e8e4d8"/>' +
+        '<path d="M0 250 C128 216 250 240 400 210 L400 300 L0 300 Z" fill="#c9c5b6"/>' +
+        '<rect x="238" y="120" width="96" height="92" rx="2" fill="#efe2b8"/>' +
+        '<rect x="238" y="120" width="96" height="92" rx="2" fill="none" stroke="#8a6a35" stroke-width="6"/>' +
+        '<line x1="286" y1="120" x2="286" y2="212" stroke="#8a6a35" stroke-width="5"/>' +
+        '<line x1="238" y1="166" x2="334" y2="166" stroke="#8a6a35" stroke-width="5"/>' +
+        '<g fill="#fff" opacity=".85">' +
+        '<circle cx="140" cy="96" r="2.5"/><circle cx="176" cy="132" r="2"/><circle cx="122" cy="176" r="3"/>' +
+        '<circle cx="206" cy="82" r="2"/><circle cx="352" cy="72" r="2.5"/><circle cx="330" cy="110" r="2"/>' +
+        '</g>' +
+        '</svg>'
+
+      const ARTS = [
+        { name: '红幕', themes: ['stage', 'drama', 'theater'], svg: CURTAIN },
+        { name: '放映', themes: ['stage', 'drama', 'theater', 'film'], svg: PROJECTOR },
+        { name: '手稿', themes: ['stage', 'drama', 'novel', 'book', 'study', 'poetry'], svg: SCRIPT_PAGE },
+        { name: '墨月', themes: ['poetry', 'nature', 'water', 'autumn', 'winter', 'classic'], svg: INK_MOON },
+        { name: '灯下', themes: ['novel', 'book', 'study', 'foreign', 'winter'], svg: DESK_LAMP },
+        { name: '春窗', themes: ['spring', 'rain', 'water', 'nature', 'poetry'], svg: SPRING_WINDOW },
+        { name: '夏野', themes: ['summer', 'nature', 'foreign', 'poetry'], svg: SUMMER_FIELD },
+        { name: '秋月', themes: ['autumn', 'water', 'nature', 'poetry', 'novel'], svg: AUTUMN_MOON },
+        { name: '冬夜', themes: ['winter', 'snow', 'novel', 'book', 'foreign'], svg: WINTER_NIGHT }
+      ]
+
+      /* ---------------- 状态 ---------------- */
+      const canvas = document.getElementById('poster')
+      const ctx = canvas.getContext('2d')
+      const LW = 750
+      const LH = 1000
+      const SCALE = 2
+      canvas.width = LW * SCALE
+      canvas.height = LH * SCALE
+      ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0)
+
+      const state = {
+        date: getToday(),
+        textMode: 'auto',
+        quoteOffset: 0,
+        manual: '',
+        manualSource: '',
+        imgMode: 'none',
+        artIndex: 0,
+        uploadedUrl: ''
+      }
+
+      let renderToken = 0
+
+      const els = {
+        headerDate: document.getElementById('header-date'),
+        dateHint: document.getElementById('date-hint'),
+        textAuto: document.getElementById('text-auto'),
+        textManual: document.getElementById('text-manual'),
+        manual: document.getElementById('manual-text'),
+        manualSource: document.getElementById('manual-source'),
+        manualFields: document.getElementById('manual-fields'),
+        imgButtons: Array.from(document.querySelectorAll('.img-mode')),
+        upload: document.getElementById('upload-file'),
+        shuffle: document.getElementById('shuffle'),
+        swapImg: document.getElementById('swap-img'),
+        download: document.getElementById('download')
+      }
+
+      /* ---------------- 文案 ---------------- */
+      function daySeed(d) {
+        return parseInt(d.key, 10)
+      }
+
+      function quoteIndex() {
+        const base = daySeed(state.date) % QUOTES.length
+        return (base + state.quoteOffset) % QUOTES.length
+      }
+
+      function getAutoEntry() {
+        const term = currentSolarTerm(state.date)
+        if (term && TERM_QUOTES[term.name]) {
+          const season = termSeason(term.name)
+          const pool = TERM_NAMES
+            .filter(function (name) { return termSeason(name) === season && TERM_QUOTES[name] })
+            .map(function (name) { return { name: name, quote: TERM_QUOTES[name] } })
+          const currentIdx = pool.findIndex(function (item) { return item.name === term.name })
+          const selected = pool[(currentIdx + state.quoteOffset) % pool.length]
+          return Object.assign({}, selected.quote, {
+            term: selected.name === term.name ? term.name : '',
+            themes: [season, 'season', 'term', 'nature', 'poetry']
+          })
+        }
+        return QUOTES[quoteIndex()]
+      }
+
+      function getQuoteText() {
+        if (state.textMode === 'manual') {
+          return state.manual.trim() || '写一句今天想说的话，会印在卡片上'
+        }
+        return getAutoEntry().text
+      }
+
+      function quoteSource() {
+        if (state.textMode === 'manual') {
+          return state.manualSource.trim()
+        }
+        const entry = getAutoEntry()
+        const termTag = entry.term ? entry.term + ' · ' : ''
+        return termTag + entry.type + ' · 摘自 ' + entry.ref
+      }
+
+      function matchedArts(entry) {
+        const themes = entry.themes || []
+        return ARTS.filter(function (art) {
+          return art.themes.some(function (t) {
+            return themes.indexOf(t) >= 0
+          })
+        })
+      }
+
+      function currentArt() {
+        return ARTS[state.artIndex % ARTS.length]
+      }
+
+      function currentArtSvg() {
+        return currentArt().svg
+      }
+
+      function chooseAutoArtIfNeeded() {
+        if (state.imgMode !== 'auto' || state.textMode === 'manual') return
+        const pool = matchedArts(getAutoEntry())
+        if (!pool.length) return
+        const cur = currentArt()
+        const inside = pool.some(function (art) { return art.name === cur.name })
+        if (!inside) {
+          const pick = pool[daySeed(state.date) % pool.length]
+          state.artIndex = ARTS.indexOf(pick)
+        }
+      }
+
+      function advanceArt() {
+        let pool
+        if (state.textMode === 'manual') {
+          pool = ARTS
+        } else {
+          pool = matchedArts(getAutoEntry())
+          if (!pool.length) pool = ARTS
+        }
+        const cur = currentArt()
+        let idx = pool.findIndex(function (art) { return art.name === cur.name })
+        if (idx < 0) idx = 0
+        const next = pool[(idx + 1) % pool.length]
+        state.artIndex = ARTS.indexOf(next)
+      }
+
+      /* ---------------- Canvas 工具 ---------------- */
+      const SERIF = '"LXGW WenKai","Kaiti SC","STKaiti","KaiTi",serif'
+      const SANS = '"PingFang TC","PingFang SC","Microsoft JhengHei","Microsoft YaHei",sans-serif'
+
+      function font(px, style) {
+        return (style || '400') + ' ' + px + 'px ' + SERIF
+      }
+
+      function sansFont(px, weight) {
+        return (weight || '400') + ' ' + px + 'px ' + SANS
+      }
+
+      function line(x1, y1, x2, y2, color, width, dash) {
+        ctx.strokeStyle = color
+        ctx.lineWidth = width
+        ctx.setLineDash(dash || [])
+        ctx.beginPath()
+        ctx.moveTo(x1, y1)
+        ctx.lineTo(x2, y2)
+        ctx.stroke()
+        ctx.setLineDash([])
+      }
+
+      function fillText(text, x, y, style) {
+        ctx.font = style.font
+        ctx.fillStyle = style.color
+        ctx.textAlign = style.align || 'left'
+        ctx.textBaseline = style.baseline || 'alphabetic'
+        ctx.fillText(text, x, y)
+      }
+
+      function wrapByWidth(text, maxWidth, fontSpec) {
+        ctx.font = fontSpec
+        const chars = Array.from(text)
+        const lines = []
+        let cur = ''
+        for (let i = 0; i < chars.length; i++) {
+          const next = cur + chars[i]
+          if (cur && ctx.measureText(next).width > maxWidth) {
+            lines.push(cur)
+            cur = chars[i]
+          } else {
+            cur = next
+          }
+        }
+        if (cur) lines.push(cur)
+        return lines
+      }
+
+      function loadSvg(svg) {
+        return new Promise(function (resolve, reject) {
+          const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }))
+          const img = new Image()
+          img.onload = function () { URL.revokeObjectURL(url); resolve(img) }
+          img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('SVG 载入失败')) }
+          img.src = url
+        })
+      }
+
+      function roundedRect(x, y, w, h, r) {
+        ctx.beginPath()
+        ctx.moveTo(x + r, y)
+        ctx.arcTo(x + w, y, x + w, y + h, r)
+        ctx.arcTo(x + w, y + h, x, y + h, r)
+        ctx.arcTo(x, y + h, x, y, r)
+        ctx.arcTo(x, y, x + w, y, r)
+        ctx.closePath()
+      }
+
+      /* ---------------- 背景与固定排版 ---------------- */
+      function drawPaper() {
+        ctx.fillStyle = '#f4ecdd'
+        ctx.fillRect(0, 0, LW, LH)
+        const g = ctx.createRadialGradient(610, 70, 10, 610, 70, 460)
+        g.addColorStop(0, 'rgba(180,67,47,.055)')
+        g.addColorStop(1, 'rgba(180,67,47,0)')
+        ctx.fillStyle = g
+        ctx.fillRect(0, 0, LW, LH)
+      }
+
+      function drawMasthead(d) {
+        const x1 = 50
+        const x2 = LW - 50
+        line(x1, 48, x2, 48, '#28261f', 2.5)
+        line(x1, 92, x2, 92, '#28261f', 1)
+
+        fillText('戏剧·诗歌·小说', x1, 78, {
+          font: font(22, '500'),
+          color: '#28261f'
+        })
+        fillText('码字人日历', x2, 78, {
+          font: font(21, '500'),
+          color: '#b4432f',
+          align: 'right'
+        })
+
+        // 红色齿孔装饰
+        ctx.fillStyle = 'rgba(180,67,47,.72)'
+        for (let x = 58; x <= x2 - 8; x += 16) {
+          ctx.beginPath()
+          ctx.arc(x, 107, 2.3, 0, Math.PI * 2)
+          ctx.fill()
+        }
+      }
+
+      function drawDate(d) {
+        const dayText = d.monthDay
+        ctx.font = font(58, '500')
+        const dayWidth = Math.ceil(ctx.measureText(dayText).width)
+        fillText(dayText, 50, 190, {
+          font: font(58, '500'),
+          color: '#28261f'
+        })
+        const metaX = 50 + dayWidth + 24
+        fillText(d.year + '年', metaX, 168, {
+          font: font(15),
+          color: '#6d675b'
+        })
+        fillText(d.weekday, metaX, 190, {
+          font: font(15),
+          color: '#6d675b'
+        })
+
+        const issue = '第 ' + d.yearDay + ' 场'
+        ctx.font = sansFont(15)
+        const iw = Math.ceil(ctx.measureText(issue).width)
+        const ix = LW - 50 - iw - 28
+        ctx.fillStyle = '#b4432f'
+        ctx.fillRect(ix, 150, iw + 28, 42)
+        fillText(issue, ix + (iw + 28) / 2, 176, {
+          font: sansFont(15),
+          color: '#f4ecdd',
+          align: 'center'
+        })
+
+        line(50, 212, LW - 50, 212, 'rgba(40,38,31,.45)', 1)
+      }
+
+      function drawImageBlock(img) {
+        const maxW = LW - 96
+        const maxH = 316
+        let w = maxW
+        let h = maxH
+        if (img && isFinite(img.width) && img.width > 0 && img.height > 0) {
+          const aspect = img.width / img.height
+          if (aspect > maxW / maxH) {
+            w = maxW
+            h = w / aspect
+          } else {
+            h = maxH
+            w = h * aspect
+          }
+        }
+        const y = 238
+        const x = (LW - w) / 2
+
+        // 纸框：完整显示图片，不做拉伸或裁切
+        line(x - 9, y - 9, x + w + 9, y - 9, '#28261f', 1.2)
+        line(x + w + 9, y - 9, x + w + 9, y + h + 9, '#28261f', 1.2)
+        line(x + w + 9, y + h + 9, x - 9, y + h + 9, '#28261f', 1.2)
+        line(x - 9, y + h + 9, x - 9, y - 9, '#28261f', 1.2)
+        line(x - 4, y - 4, x + w + 4, y - 4, 'rgba(40,38,31,.5)', 1)
+        line(x + w + 4, y - 4, x + w + 4, y + h + 4, 'rgba(40,38,31,.5)', 1)
+        line(x + w + 4, y + h + 4, x - 4, y + h + 4, 'rgba(40,38,31,.5)', 1)
+        line(x - 4, y + h + 4, x - 4, y - 4, 'rgba(40,38,31,.5)', 1)
+
+        if (img) {
+          ctx.drawImage(img, x, y, w, h)
+        } else {
+          ctx.fillStyle = '#d9cfb8'
+          ctx.fillRect(x, y, w, h)
+        }
+
+        return y + h + 24
+      }
+
+      function layoutQuote(quoteText, quoteTop) {
+        const maxW = 650
+        const top = quoteTop
+        const availH = quoteTop > 400 ? (912 - 52 - quoteTop) : 610
+        let size = quoteTop > 400 ? 27 : 33
+        let lineHeight = 0
+        let lines = []
+
+        for (let guard = 0; guard < 8; guard++) {
+          const spec = font(size, '400')
+          lines = wrapByWidth(quoteText, maxW, spec)
+          lineHeight = Math.round(size * 1.78)
+          const fits = lines.length * lineHeight <= availH - 44
+          if (fits || size <= 21) break
+          size -= 2
+        }
+
+        const total = lines.length * lineHeight
+        const y = top + Math.max(0, (availH - total - 44) / 2)
+        return { lines: lines, size: size, lineHeight: lineHeight, y: y }
+      }
+
+      function drawQuote(d, quoteTop) {
+        const quoteText = '「' + getQuoteText() + '」'
+        const lay = layoutQuote(quoteText, quoteTop)
+
+        for (let i = 0; i < lay.lines.length; i++) {
+          fillText(lay.lines[i], 50, lay.y + i * lay.lineHeight + lay.size, {
+            font: font(lay.size, '400'),
+            color: '#28261f'
+          })
+        }
+
+        const src = quoteSource()
+        const srcY = lay.y + lay.lines.length * lay.lineHeight + 24
+        fillText(src ? '—— ' + src : '', LW - 50, srcY, {
+          font: sansFont(13),
+          color: '#6d675b',
+          align: 'right'
+        })
+      }
+
+      function drawFooter(d) {
+        line(50, 912, LW - 50, 912, 'rgba(40,38,31,.5)', 1, [2, 7])
+        fillText('码字人日历 · 戏票存根', 50, 950, {
+          font: sansFont(13),
+          color: '#6d675b'
+        })
+        fillText('场次 ' + d.yearDay + ' / ' + d.totalDays, LW - 50, 950, {
+          font: sansFont(13),
+          color: '#6d675b',
+          align: 'right'
+        })
+      }
+
+      /* ---------------- 渲染 ---------------- */
+      async function render() {
+        const token = ++renderToken
+        ctx.clearRect(0, 0, LW, LH)
+        drawPaper()
+        drawMasthead(state.date)
+        drawDate(state.date)
+
+        let img = null
+        if (state.imgMode === 'auto') {
+          try {
+            img = await loadSvg(currentArtSvg())
+          } catch (e) {
+            img = null
+          }
+        } else if (state.imgMode === 'upload' && state.uploadedUrl) {
+          try {
+            img = await loadUrlImage(state.uploadedUrl)
+          } catch (e) {
+            img = null
+          }
+        }
+
+        if (token !== renderToken) return
+        let quoteTop = 250
+        if (state.imgMode !== 'none') {
+          quoteTop = drawImageBlock(img)
+        }
+        drawQuote(state.date, quoteTop)
+        drawFooter(state.date)
+      }
+
+      function loadUrlImage(url) {
+        return new Promise(function (resolve, reject) {
+          const img = new Image()
+          img.onload = function () { resolve(img) }
+          img.onerror = function () { reject(new Error('图片载入失败')) }
+          img.src = url
+        })
+      }
+
+      /* ---------------- 下载 ---------------- */
+      function downloadPng() {
+        const d = state.date
+        const name = '码字人日历-' + d.key + '.png'
+        if (canvas.toBlob) {
+          canvas.toBlob(function (blob) {
+            if (!blob) return
+            triggerDownload(URL.createObjectURL(blob), name)
+          }, 'image/png')
+        } else {
+          triggerDownload(canvas.toDataURL('image/png'), name)
+        }
+      }
+
+      function triggerDownload(href, name) {
+        const a = document.createElement('a')
+        a.href = href
+        a.download = name
+        document.body.appendChild(a)
+        a.click()
+        a.remove()
+      }
+
+      /* ---------------- 介面 ---------------- */
+      function syncControls() {
+        els.textAuto.setAttribute('aria-pressed', String(state.textMode === 'auto'))
+        els.textManual.setAttribute('aria-pressed', String(state.textMode === 'manual'))
+        els.manualFields.classList.toggle('show', state.textMode === 'manual')
+        if (state.textMode === 'manual') {
+          if (document.activeElement !== els.manual) els.manual.value = state.manual
+          if (document.activeElement !== els.manualSource) els.manualSource.value = state.manualSource
+        }
+
+        els.imgButtons.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.img === state.imgMode))
+        })
+
+        els.shuffle.classList.toggle('hidden', state.textMode !== 'auto')
+        els.swapImg.classList.toggle('hidden', state.imgMode !== 'auto')
+
+        els.headerDate.textContent =
+          state.date.dateText + ' · ' + state.date.weekday + ' · 第 ' + state.date.yearDay + ' 场'
+        els.dateHint.textContent = state.date.monthDay + ' ' + state.date.weekday
+      }
+
+      function saveManualToStorage() {
+        try {
+          const key = 'daily-calendar-manual-' + state.date.key
+          if (state.manual.trim() || state.manualSource.trim()) {
+            localStorage.setItem(key, JSON.stringify({ text: state.manual, source: state.manualSource }))
+          }
+          else localStorage.removeItem(key)
+        } catch (e) { /* 忽略 */ }
+      }
+
+      function loadManualFromStorage() {
+        try {
+          const key = 'daily-calendar-manual-' + state.date.key
+          const saved = localStorage.getItem(key)
+          const data = saved ? JSON.parse(saved) : null
+          state.manual = data && data.text ? data.text : ''
+          state.manualSource = data && data.source ? data.source : ''
+          els.manual.value = state.manual
+          els.manualSource.value = state.manualSource
+        } catch (e) { /* 忽略 */ }
+      }
+
+      els.textAuto.addEventListener('click', function () {
+        state.textMode = 'auto'
+        chooseAutoArtIfNeeded()
+        syncControls()
+        render()
+      })
+
+      els.textManual.addEventListener('click', function () {
+        state.textMode = 'manual'
+        syncControls()
+        els.manual.focus()
+        render()
+      })
+
+      els.manual.addEventListener('input', function () {
+        state.manual = els.manual.value
+        saveManualToStorage()
+        render()
+      })
+
+      els.manualSource.addEventListener('input', function () {
+        state.manualSource = els.manualSource.value
+        saveManualToStorage()
+        render()
+      })
+
+      els.imgButtons.forEach(function (b) {
+        b.addEventListener('click', function () {
+          state.imgMode = b.dataset.img
+          if (b.dataset.img === 'auto') {
+            chooseAutoArtIfNeeded()
+          }
+          syncControls()
+          render()
+        })
+      })
+
+      els.upload.addEventListener('change', function () {
+        const file = els.upload.files && els.upload.files[0]
+        if (!file) return
+        const url = URL.createObjectURL(file)
+        state.uploadedUrl = url
+        state.imgMode = 'upload'
+        syncControls()
+        render()
+        els.upload.value = ''
+      })
+
+      els.shuffle.addEventListener('click', function () {
+        state.textMode = 'auto'
+        state.quoteOffset += 1
+        chooseAutoArtIfNeeded()
+        syncControls()
+        render()
+      })
+
+      els.swapImg.addEventListener('click', function () {
+        advanceArt()
+        render()
+      })
+
+      els.download.addEventListener('click', downloadPng)
+
+      /* ---------------- 启动 ---------------- */
+      function boot() {
+        loadManualFromStorage()
+        syncControls()
+        render()
+      }
+      if (document.fonts && document.fonts.load) {
+        Promise.all([
+          document.fonts.load('400 20px "LXGW WenKai"'),
+          document.fonts.load('700 20px "LXGW WenKai"'),
+          document.fonts.load('400 20px "LXGW WenKai"', '码字人日历戏剧诗歌小说看水写')
+        ]).then(boot, boot)
+      } else {
+        boot()
+      }
+    })()
+  </script>
+</body>
+</html>
