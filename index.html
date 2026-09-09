@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>码字人日历 · 戏剧·诗歌·小说</title>
+  <title>码字人日历 · 戏剧·诗歌·电影</title>
   <style>
     @import url('fonts/smiley/font.css');
     @import url('fonts/noto-serif/400.css');
@@ -207,13 +207,13 @@
 <body>
   <main>
     <header>
-      <p class="kicker">戏剧 · 诗歌 · 小说</p>
+      <p class="kicker">戏剧 · 诗歌 · 电影</p>
       <h1>码字人日历</h1>
       <p class="sub" id="header-date">—</p>
     </header>
 
     <section class="stage" aria-label="今日码字人日历卡片预览">
-      <canvas id="poster" width="1500" height="2000" aria-label="戏剧诗歌小说风格码字人日历卡片"></canvas>
+      <canvas id="poster" width="1500" height="2000" aria-label="戏剧诗歌电影风格码字人日历卡片"></canvas>
     </section>
 
     <section class="panel" aria-label="卡片编辑">
@@ -393,6 +393,97 @@
           ref: '《圣经·传道书》3:1',
           origin: '外',
           themes: ['time', 'season', 'foreign', 'nature']
+        },
+        {
+          text: '人有悲欢离合，月有阴晴圆缺，此事古难全。',
+          type: '诗歌',
+          ref: '苏轼《水调歌头》',
+          origin: '中',
+          themes: ['autumn', 'moon', 'nature', 'poetry']
+        },
+        {
+          text: '众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。',
+          type: '诗歌',
+          ref: '辛弃疾《青玉案·元夕》',
+          origin: '中',
+          themes: ['spring', 'night', 'nature', 'poetry']
+        },
+        {
+          text: '知否，知否？应是绿肥红瘦。',
+          type: '诗歌',
+          ref: '李清照《如梦令》',
+          origin: '中',
+          themes: ['spring', 'nature', 'rain', 'poetry']
+        },
+        {
+          text: '劝君更尽一杯酒，西出阳关无故人。',
+          type: '诗歌',
+          ref: '王维《送元二使安西》',
+          origin: '中',
+          themes: ['autumn', 'journey', 'nature', 'poetry']
+        },
+        {
+          text: '露从今夜白，月是故乡明。',
+          type: '诗歌',
+          ref: '杜甫《月夜忆舍弟》',
+          origin: '中',
+          themes: ['autumn', 'moon', 'nature', 'poetry']
+        },
+        {
+          text: '开轩面场圃，把酒话桑麻。',
+          type: '诗歌',
+          ref: '孟浩然《过故人庄》',
+          origin: '中',
+          themes: ['summer', 'nature', 'poetry']
+        },
+        {
+          text: '无可奈何花落去，似曾相识燕归来。',
+          type: '诗歌',
+          ref: '晏殊《浣溪沙》',
+          origin: '中',
+          themes: ['spring', 'autumn', 'nature', 'poetry']
+        },
+        {
+          text: '问渠那得清如许？为有源头活水来。',
+          type: '诗歌',
+          ref: '朱熹《观书有感》',
+          origin: '中',
+          themes: ['water', 'book', 'novel', 'poetry']
+        },
+        {
+          text: '忽如一夜春风来，千树万树梨花开。',
+          type: '诗歌',
+          ref: '岑参《白雪歌送武判官归京》',
+          origin: '中',
+          themes: ['winter', 'nature', 'poetry']
+        },
+        {
+          text: '情不知所起，一往而深。',
+          type: '话剧',
+          ref: '汤显祖《牡丹亭·题记》',
+          origin: '中',
+          themes: ['stage', 'drama', 'spring', 'poetry']
+        },
+        {
+          text: '世事洞明皆学问，人情练达即文章。',
+          type: '小说',
+          ref: '曹雪芹《红楼梦》',
+          origin: '中',
+          themes: ['novel', 'book', 'study']
+        },
+        {
+          text: '希望本是无所谓有，无所谓无的。这正如地上的路；其实地上本没有路，走的人多了，也便成了路。',
+          type: '小说',
+          ref: '鲁迅《故乡》',
+          origin: '中',
+          themes: ['novel', 'journey', 'winter', 'nature']
+        },
+        {
+          text: '这是最好的时代，这是最坏的时代。',
+          type: '小说',
+          ref: '狄更斯《双城记》',
+          origin: '外',
+          themes: ['novel', 'book', 'foreign', 'time']
         }
       ]
 
@@ -658,7 +749,7 @@
       }
 
       function quoteIndex() {
-        const base = daySeed(state.date) % QUOTES.length
+        const base = Math.max(0, state.date.yearDay - 1)
         return (base + state.quoteOffset) % QUOTES.length
       }
 
@@ -835,7 +926,7 @@
         line(x1, 48, x2, 48, '#28261f', 2.5)
         line(x1, 92, x2, 92, '#28261f', 1)
 
-        fillText('戏剧·诗歌·小说', x1, 78, {
+        fillText('戏剧·诗歌·电影', x1, 78, {
           font: displayFont(22, '400'),
           color: '#28261f'
         })
@@ -969,7 +1060,7 @@
 
       function drawFooter(d) {
         line(50, 912, LW - 50, 912, 'rgba(40,38,31,.5)', 1, [2, 7])
-        fillText('码字人日历 · 戏票存根', 50, 950, {
+        fillText('码字人日历 · 门票存根', 50, 950, {
           font: sansFont(13),
           color: '#6d675b'
         })
@@ -981,8 +1072,38 @@
       }
 
       /* ---------------- 渲染 ---------------- */
+      function libraryText() {
+        const parts = []
+        QUOTES.forEach(function (q) {
+          parts.push(q.text, q.ref)
+        })
+        Object.keys(TERM_QUOTES).forEach(function (name) {
+          const q = TERM_QUOTES[name]
+          parts.push(q.text, q.ref)
+        })
+        parts.push('码字人日历戏剧诗歌电影门票存根场次出处摘自年月日星期')
+        return parts.join('')
+      }
+
+      function waitRenderFonts() {
+        if (!document.fonts || !document.fonts.load) return Promise.resolve()
+        const text = getQuoteText() + quoteSource() + libraryText()
+        const jobs = [
+          document.fonts.load(displayFont(16), '码字人日历戏剧诗歌电影'),
+          document.fonts.load(font(16, '900'), state.date.monthDay + state.date.weekday + state.date.year + '年第场日月'),
+          document.fonts.load(kaiFont(16), text),
+          document.fonts.load(sansFont(16), text)
+        ]
+        const timeout = new Promise(function (resolve) {
+          setTimeout(resolve, 2500)
+        })
+        return Promise.race([Promise.all(jobs), timeout])
+      }
+
       async function render() {
         const token = ++renderToken
+        await waitRenderFonts()
+        if (token !== renderToken) return
         ctx.clearRect(0, 0, LW, LH)
         drawPaper()
         drawMasthead(state.date)
@@ -1155,14 +1276,21 @@
       function boot() {
         loadManualFromStorage()
         syncControls()
-        render()
+        render().then(function () {
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function () {
+              render()
+            })
+          }
+        })
       }
       if (document.fonts && document.fonts.load) {
+        const lib = libraryText()
         Promise.all([
-          document.fonts.load('400 20px "Smiley Sans Oblique"', '码字人日历戏剧诗歌小说'),
-          document.fonts.load('900 20px "Noto Serif SC"', '月日月日历场次戏剧'),
-          document.fonts.load('400 20px "LXGW WenKai Screen"', '写一句今天想说的话慢慢来'),
-          document.fonts.load('400 20px "Noto Sans SC"', '场次出处摘自戏票存根')
+          document.fonts.load('400 20px "Smiley Sans Oblique"', '码字人日历戏剧诗歌电影'),
+          document.fonts.load('900 20px "Noto Serif SC"', lib),
+          document.fonts.load('400 20px "LXGW WenKai Screen"', lib),
+          document.fonts.load('400 20px "Noto Sans SC"', lib)
         ]).then(boot, boot)
       } else {
         boot()
