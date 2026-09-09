@@ -251,7 +251,9 @@
       <div class="actions">
         <button type="button" id="shuffle" class="secondary">换一句</button>
         <button type="button" id="swap-img" class="secondary hidden">换配图</button>
-        <button type="button" id="download" class="primary">下载 PNG</button>
+      </div>
+      <div class="actions">
+        <button type="button" id="download" class="secondary">下载 PNG</button>
         <button type="button" id="download-jpg" class="secondary">下载 JPG</button>
       </div>
     </section>
@@ -4788,7 +4790,7 @@
 
         const src = quoteSource()
         const lastBaseline = lay.y + (lay.lines.length - 1) * lay.lineHeight + lay.size
-        const srcY = lastBaseline + 14
+        const srcY = lastBaseline + 22
         fillText(src ? '—— ' + src : '', LW - 78, srcY, {
           font: sansFont(13),
           color: '#6d675b',
